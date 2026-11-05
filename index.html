@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الأمن والسلامة المدرسية | إعداد: شيخه العتيبي</title>
+<meta name="description" content="بوابة الأمن والسلامة المدرسية لإعداد خطط الإخلاء والتمارين والسجلات، مع أسماء قابلة للتعديل وحفظ محلي وطباعة.">
+<meta name="theme-color" content="#123b46">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1a2b; --panel:#16243a; --panel2:#1c2d47; --line:#2a3f60;
+  --head:#3b5f93; --text:#e8eef7; --muted:#9fb0c8; --gold:#e3b23c;
+  --green:#4caf6d; --red:#e0605a; --input:#0e1828;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Tajawal','Segoe UI',Tahoma,system-ui,sans-serif;font-size:15px;line-height:1.7}
+.wrap{max-width:1050px;margin:0 auto;padding:18px 14px 90px}
+.kicker{color:var(--green);font-weight:700;font-size:13px}
+h1{margin:2px 0 4px;font-size:clamp(20px,4vw,28px);font-weight:800}
+.bar{width:90px;height:4px;background:var(--gold);border-radius:3px}
+.sub{color:var(--muted);font-size:13px;margin-top:6px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+button,.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:999px;padding:8px 16px;cursor:pointer;background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+button.primary{background:var(--green);border-color:var(--green);color:#fff}
+button.gold{background:var(--gold);border-color:var(--gold);color:#1a1a1a}
+button.ghost{background:transparent}
+button:hover,.btn:hover{filter:brightness(1.12)}
+.progress{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.meter{flex:1;min-width:160px;height:10px;background:var(--input);border-radius:9px;overflow:hidden}
+.meter>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .3s}
+.pct{font-weight:800;min-width:48px;text-align:center}
+.status{font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px}
+.s-ok{background:rgba(76,175,109,.18);color:var(--green)}
+.s-no{background:rgba(224,96,90,.16);color:var(--red)}
+section.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-top:14px;overflow:hidden}
+.card>h2{margin:0;background:var(--head);font-size:16px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.card>h2 .chk{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;background:rgba(0,0,0,.25)}
+.card>h2 .chk.done{background:var(--green)}
+.body{padding:14px 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.full{grid-column:1/-1}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:500}
+input,select,textarea{width:100%;font-family:inherit;font-size:14px;background:var(--input);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:0}
+textarea{min-height:64px;resize:vertical}
+.hint{font-size:12px;color:var(--muted);margin-top:4px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;align-items:center;gap:6px;background:var(--input);border:1px solid var(--line);padding:6px 12px;border-radius:999px;color:var(--text);margin:0;cursor:pointer}
+.checks input{width:auto}
+table{width:100%;border-collapse:collapse}
+th,td{border-bottom:1px solid var(--line);padding:6px;text-align:right;vertical-align:middle}
+th{font-size:13px;color:var(--muted);font-weight:700}
+td input{padding:6px 8px}
+.del{background:transparent;border:0;color:var(--red);font-size:18px;padding:2px 8px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{display:flex;gap:8px;align-items:center;margin-bottom:6px;counter-increment:s}
+ol.steps li::before{content:counter(s);flex:0 0 26px;height:26px;border-radius:50%;background:var(--gold);color:#1a1a1a;font-weight:800;display:grid;place-items:center;font-size:13px}
+.sketch{margin-top:10px;max-width:100%;border-radius:10px;border:1px solid var(--line);display:none}
+.att{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.att:last-child{border-bottom:0}
+.att input{width:20px;height:20px}
+.att b{flex:1}
+.att span{color:var(--green);font-weight:700;font-size:13px}
+.criteria{background:rgba(59,95,147,.35);border:1px solid var(--head);border-radius:14px;padding:14px 16px;margin-top:14px}
+.criteria h3{margin:0 0 8px;color:var(--gold);font-size:16px}
+.crit{display:flex;gap:8px;align-items:center;padding:5px 0}
+.dot{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex:0 0 20px}
+.dot.ok{background:var(--green);color:#fff}.dot.no{background:var(--red);color:#fff}
+.verdict{margin-top:10px;padding:10px 14px;border-radius:10px;font-weight:700}
+.sign{height:44px;border-bottom:1px dashed var(--muted)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none;z-index:50}
+.toast.show{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
+.modal.open{display:flex}
+#modal{z-index:40}
+.modal .box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;max-width:440px;width:100%}
+.modal .box.wide{max-width:620px;max-height:85vh;overflow:auto}
+.modal .box p{margin:0 0 14px}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.hrow small{color:var(--muted);display:block}
+.hrow .acts{display:flex;gap:6px}
+.hrow .acts button{padding:5px 12px;font-size:13px}
+footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
+.view{display:none}.view.on{display:block}
+body{background:radial-gradient(1200px 600px at 85% -10%,rgba(227,178,60,.10),transparent 60%),radial-gradient(900px 500px at 0% 0%,rgba(59,95,147,.35),transparent 60%),#0b1424;background-attachment:fixed}
+.hub{position:relative;margin:-18px -14px 18px;padding:26px 22px 0;background:linear-gradient(180deg,rgba(22,36,58,.95),rgba(15,26,43,.6));border-bottom:1px solid rgba(227,178,60,.25);border-radius:0 0 26px 26px;box-shadow:0 20px 50px -30px rgba(0,0,0,.8)}
+.hub::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:3px}
+.hub-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px}
+.seal{width:58px;height:58px;border-radius:18px;background:linear-gradient(145deg,#3b5f93,#1c2d47);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(227,178,60,.4),0 10px 25px -10px rgba(227,178,60,.5)}
+.seal svg{width:36px;height:36px}
+.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.5px}
+.hub-title{font-size:clamp(17px,3.2vw,24px);font-weight:800;line-height:1.4}
+.byline{text-align:center;padding:8px 18px;border-radius:14px;background:rgba(227,178,60,.08);border:1px solid rgba(227,178,60,.3)}
+.byline span{display:block;font-size:11px;color:var(--muted)}
+.byline strong{color:var(--gold);font-size:16px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px;padding-bottom:18px;position:sticky;top:0;z-index:8}
+.tab{position:relative;display:flex;align-items:center;gap:10px;padding:12px;border-radius:16px;text-decoration:none;color:var(--text);background:rgba(28,45,71,.75);border:1px solid var(--line);backdrop-filter:blur(8px);transition:all .25s}
+.tab:hover{border-color:rgba(227,178,60,.6);transform:translateY(-2px)}
+.tab.on{background:linear-gradient(145deg,rgba(227,178,60,.18),rgba(28,45,71,.9));border-color:var(--gold);box-shadow:0 12px 30px -14px rgba(227,178,60,.55)}
+.tab b{display:block;font-size:14px;line-height:1.35}
+.tab small{color:var(--muted);font-size:12px}
+.tab.on small{color:var(--gold)}
+.ring{width:50px;height:50px;flex:0 0 50px;transform:rotate(-90deg)}
+.ring .rb{fill:none;stroke:rgba(255,255,255,.08);stroke-width:4}
+.ring .rf{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset .5s}
+.ring .rf.full{stroke:var(--green)}
+.tp{position:absolute;right:12px;width:50px;text-align:center;font-size:12px;font-weight:800}
+.view{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+section.card,.criteria,.progress,.seq{background:rgba(22,36,58,.85);box-shadow:0 14px 35px -25px rgba(0,0,0,.9)}
+.card>h2{background:linear-gradient(90deg,#3b5f93,#2c4a76)}
+.view>h1{font-size:clamp(18px,3vw,24px)}
+.backup{text-align:center}
+@media(max-width:760px){.tabs{grid-template-columns:repeat(2,1fr)}.tab b{font-size:13px}}
+@media print{.hub .tabs,.byline{display:none!important}.hub{margin:0;background:#fff;border:0;box-shadow:none;padding:0 0 10px}.hub-title{color:#000}.seal{display:none}body{background:#fff}}
+.seq{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 14px}
+.step{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:8px 4px;border-radius:12px}
+.step:hover{background:var(--panel2)}
+.step .num{width:46px;height:46px;border-radius:50%;background:#2f8f6a;color:#fff;font-weight:800;font-size:18px;display:grid;place-items:center;border:3px solid transparent}
+.step.done .num{background:var(--gold);color:#1a1a1a}
+.step.done .num{box-shadow:0 0 0 4px rgba(227,178,60,.35)}
+.step.done b{color:var(--gold)}
+.step b{font-size:14px;line-height:1.5}
+.step .ref{color:var(--gold);font-size:12px;font-weight:700}
+.step a.ref{text-decoration:underline}
+.step input{display:none}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.phases section.card{margin-top:14px}
+.att .ref{color:var(--green);font-weight:700;font-size:13px;text-decoration:underline}
+.att input:checked+b{text-decoration:line-through;color:var(--muted)}
+#aarTbl td input{min-width:100px}
+.home{text-align:center;padding:40px 0 10px}
+.tiles{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:40px 0 34px}
+.tile{width:220px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:26px 16px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .2s,border-color .2s}
+.tile:hover{transform:translateY(-4px);border-color:var(--gold)}
+.tile svg{width:76px;height:76px;color:var(--text);background:var(--head);border-radius:20px;padding:12px;margin-bottom:8px}
+.tile b{font-size:17px}.tile span{color:var(--green);font-size:13px;font-weight:700}
+.credit{color:var(--muted);font-size:14px;line-height:1.9}
+.credit strong{color:var(--gold);font-size:19px}
+.backup{margin:30px auto 0;padding-top:18px;border-top:1px solid var(--line);max-width:520px}
+.back{display:inline-block;color:var(--muted);text-decoration:none;font-weight:700;font-size:14px;margin-bottom:10px}
+.back:hover{color:var(--gold)}
+.secret{background:rgba(224,96,90,.12);border:1px solid rgba(224,96,90,.45);color:#f3b3ae;border-radius:12px;padding:10px 14px;margin-top:14px;font-weight:700}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;cursor:pointer}
+.chip.on{background:var(--gold);color:#1a1a1a;border-color:var(--gold)}
+.chip .d{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-start:6px;background:var(--red)}
+.chip .d.ok{background:var(--green)}
+@media print{
+  body{background:#fff;color:#000;font-size:12px}
+  .toolbar,.progress,.del,.addrow,.no-print,.toast,.modal,.backup,.back,.chips{display:none!important}
+  section.card,.criteria{border:1px solid #888;break-inside:avoid;background:#fff}
+  .card>h2{background:#dfe7f3;color:#000}
+  input,select,textarea{background:#fff;color:#000;border:0;border-bottom:1px dotted #999;border-radius:0}
+  label,.hint,th{color:#333}
+  .criteria{background:#f4f6fa}
+  .secret{color:#000;background:#fff}
+  .credit strong{color:#000}
+}
+@media(max-width:600px){
+  .seq{display:block;padding:4px 14px;position:relative}
+  .step{flex-direction:row;text-align:right;gap:12px;padding:12px 0;border-radius:0;border-bottom:1px solid var(--line);position:relative}
+  .step:last-child{border-bottom:0}
+  .step .num{width:38px;height:38px;flex:0 0 38px;font-size:15px}
+  .step b{flex:1;font-size:14px}
+  .step .ref{white-space:nowrap}
+  .view>h1{font-size:19px}
+  .toolbar{gap:6px}
+  .toolbar button{padding:7px 12px;font-size:13px}
+  .hub{padding:18px 14px 0}
+  .tab{padding:10px 8px;gap:6px}
+  .ring{width:42px;height:42px;flex-basis:42px}.tp{width:42px;right:8px;font-size:11px}
+}
+
+/* ===== sheets open from icons ===== */
+.view.on{position:fixed;inset:0;z-index:20;overflow-y:auto;-webkit-overflow-scrolling:touch;background:radial-gradient(900px 500px at 100% 0%,rgba(227,178,60,.08),transparent 60%),#0b1424;padding:0 max(14px,calc((100% - 1050px)/2)) 90px;transform-origin:var(--ox,50%) var(--oy,30%);animation:pop .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:scale(.25)}to{opacity:1;transform:none}}
+body.sheet-open{overflow:hidden}
+.sheet-bar{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:12px;margin:0 calc(-1*max(14px,(100vw - 1050px)/2)) 14px;padding:12px max(14px,calc((100vw - 1050px)/2));background:rgba(11,20,36,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(227,178,60,.3)}
+.sheet-bar b{font-size:17px;flex:1}
+.sheet-bar .by{color:var(--gold);font-size:12px;font-weight:700}
+.sheet-bar .x{width:40px;height:40px;padding:0;border-radius:50%;font-size:18px;background:rgba(227,178,60,.12);border-color:rgba(227,178,60,.5);color:var(--gold)}
+.view.on .progress{top:65px}
+.tabs{grid-template-columns:repeat(4,1fr)}
+.tab{flex-direction:column;text-align:center;padding:20px 10px;gap:10px}
+.tab .ring{width:74px;height:74px;flex-basis:74px}
+.tab .tp{position:absolute;top:20px;right:auto;left:50%;transform:translateX(-50%);width:74px;line-height:74px;font-size:16px}
+.tab b{font-size:15px}
+.hub{padding-bottom:6px}
+@media(max-width:760px){.tabs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.sheet-bar .by{display:none}.tab{padding:16px 8px}.tab .ring{width:62px;height:62px;flex-basis:62px}.tab .tp{width:62px;line-height:62px;font-size:14px;top:16px}}
+@media print{.hub,.backup,.sheet-bar .x{display:none!important}.view.on{position:static;overflow:visible;background:#fff;padding:0;animation:none}.sheet-bar{position:static;background:#fff;border:0;margin:0;color:#000}body.sheet-open{overflow:visible}}
+
+.rw{position:relative;display:inline-block;width:74px;height:74px}
+.rw .ring{position:absolute;inset:0}
+.rw .ic{position:absolute;inset:14px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#3b5f93,#22385b)}
+.rw .ic svg{width:30px;height:30px;color:#fff}
+.tab .tp{position:static;transform:none;width:auto;line-height:1;font-size:12px;padding:4px 12px;border-radius:999px;background:rgba(227,178,60,.12);color:var(--gold)}
+.ring .rf.zero{opacity:0}
+@media(max-width:600px){.rw{width:64px;height:64px}.rw .ic{inset:12px}.rw .ic svg{width:24px;height:24px}.tab .tp{font-size:11px}}
+
+.s-mid{background:rgba(240,167,58,.18);color:#f0a73a}
+.cl h3 .src{font-size:12px;color:var(--muted);font-weight:500;margin-inline-start:6px}
+.cl .hint{margin-top:8px}
+.tabs{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.tabs{grid-template-columns:repeat(2,1fr)}}
+#tmTbl td input,#cmTbl td input{min-width:90px}
+#rpCard{scroll-margin-top:150px}
+
+.tab.wide{grid-column:1/-1;flex-direction:row;justify-content:center;text-align:right;gap:18px;padding:16px 20px;background:linear-gradient(110deg,rgba(227,178,60,.10),rgba(28,45,71,.85) 45%)}
+.tab.wide .tp{margin-inline-start:6px}
+.segs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;margin-bottom:6px;scrollbar-width:thin}
+.seg{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:13px;border-radius:12px;background:rgba(28,45,71,.8)}
+.seg .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--head);font-size:12px}
+.seg.on{background:linear-gradient(145deg,rgba(227,178,60,.25),rgba(28,45,71,.9));border-color:var(--gold)}
+.seg.on .n{background:var(--gold);color:#1a1a1a}
+.seg .sb{font-size:11px;padding:1px 8px;border-radius:999px;background:rgba(0,0,0,.3);color:var(--muted)}
+.seg .sb.done{background:var(--green);color:#fff}
+.seg .sb:empty{display:none}
+.rg-p{display:none}.rg-p.on{display:block}
+.rg-h{color:var(--gold);font-size:15px;margin:18px 0 8px}
+.rg-h:first-child{margin-top:0}
+.rg-note{background:rgba(59,95,147,.25);border:1px solid var(--head);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:14px}
+.rg-tw{overflow-x:auto}
+.rg-t{min-width:640px;border:1px solid var(--line)}
+.rg-t th,.rg-t td{border:1px solid var(--line)}
+.rg-t thead th{background:#1f6f6a;color:#fff;text-align:center}
+.rg-t .rh{background:rgba(31,111,106,.35);color:var(--text);text-align:center;white-space:nowrap}
+.rg-t .cat{background:#1f6f6a;color:#fff;text-align:center;width:130px}
+.rg-t .fx{font-size:13px;color:var(--text)}
+.rg-t .tm{text-align:center;font-weight:700;width:110px}
+.rg-t .tk{font-size:12.5px;line-height:1.8;width:32%}
+.rg-t .sg{width:90px}
+.rg-t td input{min-width:80px}
+.com td input{min-width:130px}
+@media print{.segs{display:none!important}.rg-p:not(.on){display:none!important}.rg-t thead th,.rg-t .cat{background:#dfe7f3!important;color:#000!important}.rg-t .rh{background:#f1f4f8!important;color:#000}.rg-t .fx{color:#000}.rg-note{background:#fff;color:#000}}
+@media(max-width:600px){.tab.wide{flex-direction:column;text-align:center}}
+
+/* ===================== VIVID CHROME HOME ===================== */
+body{background:#070b16}
+.home2{position:relative;min-height:100vh;min-height:100dvh;margin:-18px -14px 0;padding:max(18px,env(safe-area-inset-top)) 14px 14px;display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,2.2vh,22px);overflow:hidden;
+  background:radial-gradient(120% 80% at 50% -10%,#1b2a5a 0%,#0b1124 55%,#060912 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none}
+.o1{width:320px;height:320px;background:#ff2e88;top:-90px;right:-80px;animation:drift 14s ease-in-out infinite}
+.o2{width:300px;height:300px;background:#00d4ff;bottom:-110px;left:-90px;animation:drift 17s ease-in-out infinite reverse}
+.o3{width:220px;height:220px;background:#ffb300;top:38%;left:55%;opacity:.28;animation:drift 20s ease-in-out infinite}
+@keyframes drift{50%{transform:translate(30px,-25px) scale(1.12)}}
+.crest{position:relative;text-align:center;z-index:1}
+.seal2{width:clamp(54px,8vh,72px);height:clamp(54px,8vh,72px);margin:0 auto 6px;border-radius:22px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#ff2e88,#7c3aed 50%,#00d4ff);box-shadow:0 0 0 2px rgba(255,255,255,.55),0 0 0 4px rgba(255,255,255,.08),0 14px 40px -8px rgba(255,46,136,.7)}
+.seal2 svg{width:60%;height:60%}
+.chrome{margin:0;font-size:clamp(32px,6.2vh,54px);font-weight:800;line-height:1.15;letter-spacing:.5px;
+  background:linear-gradient(100deg,#9aa9bd 0%,#ffffff 22%,#c7d2e0 38%,#6f8099 50%,#ffffff 62%,#d8e1ec 78%,#8d9db3 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35)) drop-shadow(0 8px 24px rgba(160,190,255,.25));animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:-220% 0}}
+.l1{margin-top:4px;font-size:clamp(12px,1.8vh,15px);font-weight:700;background:linear-gradient(90deg,#ffd23f,#ff7a00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.l2{font-size:clamp(13px,2vh,17px);font-weight:700;color:#e8eefc}
+#tabs.tabs{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.3vh,14px);margin:0 auto;padding:0;width:100%;max-width:640px}
+#tabs .tab{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;
+  padding:clamp(10px,1.6vh,16px) 6px clamp(8px,1.3vh,12px);border-radius:20px;text-decoration:none;color:#fff;font-family:inherit;cursor:pointer;
+  background:linear-gradient(150deg,var(--c1),var(--c2));border:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 6px rgba(0,0,0,.25),0 10px 24px -10px var(--c2);
+  transform:none;backdrop-filter:none;overflow:hidden;transition:transform .2s,box-shadow .2s}
+#tabs .tab::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;
+  background:linear-gradient(135deg,#fff,rgba(255,255,255,.15) 40%,rgba(255,255,255,.05) 60%,#fff);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+#tabs .tab::after{content:'';position:absolute;inset:0 0 50% 0;border-radius:20px 20px 60% 60%/20px 20px 22px 22px;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));pointer-events:none}
+#tabs .tab:hover,#tabs .tab:active{transform:translateY(-3px) scale(1.02);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 16px 30px -10px var(--c2)}
+#tabs .tab.on{box-shadow:0 0 0 2px #fff,0 16px 30px -10px var(--c2)}
+#tabs .rw{position:relative;width:clamp(46px,6.6vh,60px);height:clamp(46px,6.6vh,60px);display:block;margin-bottom:2px}
+#tabs .ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+#tabs .ring .rb{stroke:rgba(255,255,255,.28);stroke-width:3}
+#tabs .ring .rf{stroke:#fff;stroke-width:3}
+#tabs .ring .rf.full{stroke:#fff;filter:drop-shadow(0 0 3px #fff)}
+#tabs .ic{position:absolute;inset:6px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 4px 10px rgba(0,0,0,.18)}
+#tabs .ic svg{width:56%;height:56%;color:#fff}
+#tabs .ic svg [stroke="#e3b23c"]{stroke:#fff}#tabs .ic svg [fill="#e3b23c"]{fill:#fff}
+#tabs .tab b{display:block;font-size:clamp(12px,1.75vh,15px);line-height:1.3;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+#tabs .tab small{font-size:clamp(10px,1.4vh,12px);color:rgba(255,255,255,.85);line-height:1.2}
+#tabs .pc{position:absolute;top:7px;left:8px;font-size:10px;font-weight:800;padding:1px 7px;border-radius:999px;background:rgba(0,0,0,.25);color:#fff;z-index:2}
+#tabs .util{color:#1b2333}
+#tabs .util b,#tabs .util small{color:#1b2333;text-shadow:none}
+#tabs .util .ic{background:rgba(255,255,255,.55)}#tabs .util .ic svg{color:#2b3a55}
+.credit2{position:relative;z-index:1;text-align:center;font-size:13px;color:#aab6cc}
+.credit2 strong{font-size:clamp(15px,2.2vh,19px);background:linear-gradient(90deg,#fff,#ffd23f,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(min-width:900px){#tabs.tabs{grid-template-columns:repeat(3,1fr);max-width:760px}}
+/* sheets: vivid accent */
+.sheet-bar{background:linear-gradient(100deg,var(--c1,#3b5f93),var(--c2,#1c2d47));border-bottom:0;box-shadow:0 8px 24px -12px var(--c2)}
+.sheet-bar b{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.sheet-bar .by{color:#fff;opacity:.9}
+.sheet-bar .x{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.7);color:#fff}
+.view .bar{background:linear-gradient(90deg,var(--c1,#e3b23c),var(--c2,#e3b23c))}
+.view .kicker{color:var(--c1,#4caf6d)}
+.view .card>h2{background:linear-gradient(90deg,color-mix(in srgb,var(--c2,#3b5f93) 70%,#16243a),color-mix(in srgb,var(--c1,#3b5f93) 45%,#16243a))}
+.view .meter>i{background:linear-gradient(90deg,var(--c1),var(--c2))}
+.view.on{background:radial-gradient(700px 400px at 100% 0%,color-mix(in srgb,var(--c1,#e3b23c) 18%,transparent),transparent 60%),radial-gradient(600px 400px at 0% 100%,color-mix(in srgb,var(--c2,#3b5f93) 16%,transparent),transparent 60%),#0a1020}
+body.sheet-open .home2 .orb{animation-play-state:paused}
+@media print{.home2{display:none!important}}
+@media (prefers-reduced-motion:reduce){.orb,.chrome{animation:none}}
+body:not(.sheet-open) .wrap{padding-bottom:0}
+.wrap{padding-top:0}
+.home2{margin-top:0}
+.home2{margin-inline:calc(50% - 50vw);padding-inline:max(14px,calc(50vw - 380px))}
+html,body{overflow-x:hidden}
+
+/* ===================== BEIGE CHROME · NAVY · GOLD THEME ===================== */
+:root{--bg:#efe6d6;--panel:#fffcf6;--panel2:#f4ecdf;--line:#ddd0b9;--head:#14284b;--text:#14213d;--muted:#6f6656;--gold:#c9a24a;--input:#fffefa;--green:#2e7d55;--red:#b23a2e;--navy:#13264a;--navy2:#0b1830;--goldd:#8a6a1f}
+html,body{background:#efe6d6}
+body{color:var(--text);background:
+  linear-gradient(125deg,#f8f2e7 0%,#e9dec9 22%,#faf6ee 40%,#e2d5bd 58%,#f6efe3 76%,#e6dac4 100%) fixed}
+.orb{display:none}
+/* ---------- home ---------- */
+.home2{background:transparent;gap:clamp(10px,2vh,20px)}
+.crest{background:linear-gradient(160deg,#1c3766 0%,#13264a 45%,#0b1830 100%);border-radius:26px;padding:clamp(14px,2.4vh,24px) 16px clamp(12px,2vh,20px);
+  box-shadow:0 0 0 1.5px #d8b866,0 0 0 4px rgba(201,162,74,.18),0 18px 40px -18px rgba(11,24,48,.65);position:relative;overflow:hidden;max-width:640px;width:100%;margin:0 auto}
+.crest::after{content:'';position:absolute;inset:0 0 55% 0;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0));pointer-events:none}
+.seal2{background:linear-gradient(150deg,#22427a,#0d1d3b);box-shadow:0 0 0 2px #d8b866,0 0 0 5px rgba(216,184,102,.2),0 10px 24px -8px rgba(0,0,0,.6)}
+.seal2 path[stroke="#fff"]{stroke:#f1d488}
+.chrome{background:linear-gradient(100deg,#b8913a 0%,#f7e3a6 20%,#d4ae55 38%,#fff3c8 50%,#c79b3f 64%,#f3dc98 82%,#b08834 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35))}
+.l1{background:none;-webkit-background-clip:initial;background-clip:initial;color:#e9cf8a}
+.l2{color:#fff}
+#tabs .tab{background:linear-gradient(155deg,#2a4a82 0%,#163061 38%,#0e1f42 70%,#16305f 100%)!important;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -3px 8px rgba(0,0,0,.3),0 10px 22px -12px rgba(11,24,48,.75)}
+#tabs .tab::before{padding:2px;background:linear-gradient(135deg,#f6e2a2,#b8913a 30%,#f1d488 55%,#9c7a2e 80%,#f6e2a2)}
+#tabs .tab::after{background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0))}
+#tabs .tab:hover,#tabs .tab:active{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 16px 28px -12px rgba(11,24,48,.8)}
+#tabs .tab.on{box-shadow:0 0 0 3px rgba(201,162,74,.5),0 16px 28px -12px rgba(11,24,48,.8)}
+#tabs .ic{background:linear-gradient(150deg,rgba(255,255,255,.18),rgba(255,255,255,.04));box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 1px rgba(216,184,102,.55)}
+#tabs .ic svg{color:#fff}
+#tabs .ic svg [stroke="#e3b23c"]{stroke:#e9c86f!important}#tabs .ic svg [fill="#e3b23c"]{fill:#e9c86f!important}
+#tabs .ring .rb{stroke:rgba(216,184,102,.25)}
+#tabs .ring .rf,#tabs .ring .rf.full{stroke:#e9c86f;filter:none}
+#tabs .tab b{color:#fff}
+#tabs .tab small{color:#e3cf9c}
+#tabs .pc{background:linear-gradient(135deg,#f1d488,#b8913a);color:#13264a}
+#tabs .util{color:#fff}
+#tabs .util b{color:#fff}#tabs .util small{color:#e3cf9c}
+#tabs .util .ic{background:linear-gradient(150deg,rgba(255,255,255,.18),rgba(255,255,255,.04))}
+#tabs .util .ic svg{color:#e9c86f}
+.credit2{color:#6f6656}
+.credit2 strong{background:none;-webkit-background-clip:initial;background-clip:initial;color:#13264a}
+/* ---------- sheets ---------- */
+.view.on{background:linear-gradient(125deg,#f8f2e7 0%,#ebe1cd 30%,#faf6ee 50%,#e6dac4 75%,#f6efe3 100%)}
+.sheet-bar{background:linear-gradient(100deg,#1c3766,#0b1830);border-bottom:2px solid #c9a24a;box-shadow:0 8px 22px -14px rgba(11,24,48,.8)}
+.sheet-bar b{color:#fff}.sheet-bar .by{color:#e9cf8a}
+.sheet-bar .x{background:rgba(201,162,74,.15);border-color:#d8b866;color:#f1d488}
+.view .kicker{color:var(--goldd)}
+.view h1{color:var(--navy)}
+.view .bar{background:linear-gradient(90deg,#b8913a,#f1d488,#b8913a)}
+section.card,.criteria,.progress,.seq{background:var(--panel);box-shadow:0 10px 26px -20px rgba(11,24,48,.5)}
+section.card{border-color:var(--line)}
+.view .card>h2,.card>h2{background:linear-gradient(95deg,#1c3766,#0e1f42);color:#fff;border-bottom:2px solid #c9a24a}
+.card>h2 .chk{background:rgba(255,255,255,.15);color:#fff}
+.card>h2 .chk.done{background:#c9a24a;color:#13264a}
+.criteria{background:#f6efe2;border-color:#d8c49a}
+.criteria h3,.rg-h{color:var(--goldd)}
+.progress{border-color:var(--line)}
+.view .meter>i,.meter>i{background:linear-gradient(90deg,#c9a24a,#13264a)}
+.meter{background:#eadfcb}
+input,select,textarea{background:var(--input);color:var(--text);border-color:#d6c8ae}
+input:focus,select:focus,textarea:focus{outline-color:#c9a24a}
+button,.btn{background:#fffaf0;color:var(--navy);border-color:#d6c8ae}
+button.primary{background:linear-gradient(135deg,#1c3766,#0e1f42);border-color:#c9a24a;color:#f1d488}
+button.gold{background:linear-gradient(135deg,#f1d488,#c9a24a);border-color:#b8913a;color:#13264a}
+button.ghost{background:transparent}
+.checks label{background:#fffaf0;color:var(--text);border-color:#d6c8ae}
+.att{border-color:var(--line)}
+.att .ref,.step .ref{color:var(--goldd)}
+.secret{background:rgba(178,58,46,.07);border-color:rgba(178,58,46,.35);color:#9b2f25}
+.chip{background:#fffaf0;color:var(--navy);border-color:#d6c8ae}
+.chip.on{background:linear-gradient(135deg,#f1d488,#c9a24a);color:#13264a;border-color:#b8913a}
+.step:hover{background:#f4ecdf}
+.step .num{background:linear-gradient(150deg,#22427a,#0e1f42);color:#f1d488;box-shadow:0 0 0 2px #c9a24a}
+.step.done .num{background:linear-gradient(135deg,#f1d488,#c9a24a);color:#13264a}
+.step.done b{color:var(--goldd)}
+.seg{background:#fffaf0;color:var(--navy);border-color:#d6c8ae}
+.seg .n{background:var(--navy);color:#f1d488}
+.seg.on{background:linear-gradient(135deg,#1c3766,#0e1f42);color:#fff;border-color:#c9a24a}
+.seg.on .n{background:#c9a24a;color:#13264a}
+.seg .sb{background:#eadfcb;color:var(--muted)}
+.rg-note{background:#f6efe2;border-color:#d8c49a;color:var(--text)}
+.rg-t,.rg-t th,.rg-t td{border-color:#d6c8ae}
+.rg-t thead th,.rg-t .cat{background:linear-gradient(180deg,#1c3766,#0e1f42);color:#fff}
+.rg-t .rh{background:#f1e8d8;color:var(--navy)}
+.rg-t .fx{color:var(--text)}
+th{color:var(--muted)}
+.modal .box{background:#fffcf6;border-color:#d8c49a}
+.hrow{border-color:var(--line)}
+.toast{background:linear-gradient(135deg,#1c3766,#0e1f42);color:#f1d488}
+.s-ok{background:rgba(46,125,85,.12);color:#2e7d55}
+.s-no{background:rgba(178,58,46,.1);color:#b23a2e}
+.s-mid{background:rgba(201,162,74,.18);color:#8a6a1f}
+.sign{border-color:#a99d86}
+
+/* navy frame around the whole screen */
+.frame{position:fixed;inset:0;z-index:25;pointer-events:none;border:clamp(7px,1.6vw,11px) solid #13264a;
+  box-shadow:inset 0 0 0 1.5px #c9a24a,inset 0 0 0 4px rgba(201,162,74,.18),inset 0 10px 30px -18px rgba(11,24,48,.6)}
+.frame::before,.frame::after{content:'';position:absolute;width:26px;height:26px;border:2px solid #c9a24a}
+.frame::before{top:6px;right:6px;border-left:0;border-bottom:0;border-top-right-radius:6px}
+.frame::after{bottom:6px;left:6px;border-right:0;border-top:0;border-bottom-left-radius:6px}
+.home2{padding-top:max(26px,env(safe-area-inset-top));padding-bottom:22px}
+.view.on{padding-bottom:110px}
+.sheet-bar{margin-top:0}
+@media print{.frame{display:none}}
+body.sheet-open .frame::before,body.sheet-open .frame::after{display:none}
+
+
+/* Formal navy, forest green and silver identity. */
+:root{--bg:#f0f4f6;--panel:#fff;--panel2:#eaf0f3;--line:#ccd7de;--head:#173d50;--text:#183344;--muted:#5d727e;--gold:#487f88;--green:#25715a;--red:#a93b3b;--input:#fbfdfe;--navy:#173d50;--navy2:#102c3b;--goldd:#256a70}
+html,body{background:#f0f4f6;color:#183344}
+body{background:linear-gradient(140deg,#f6f8fa,#eaf0f3 60%,#f4f7f8) fixed}
+.frame{border-color:#173d50;box-shadow:inset 0 0 0 1px #b9cbd1}
+.frame::before,.frame::after{border-color:#7b9ba5}
+.home2{background:transparent;gap:18px;padding-bottom:26px}
+.crest{background:linear-gradient(130deg,#173d50,#123c40);box-shadow:0 0 0 1px #9db5bd,0 15px 35px -25px #173d50;border-radius:18px;padding:24px 18px;max-width:760px}
+.crest::after{opacity:.4}
+.chrome{color:#fff;background:none;-webkit-text-fill-color:currentColor;filter:none;animation:none;font-size:clamp(32px,5.5vh,46px);letter-spacing:0}
+.seal2{background:#1c4b56;box-shadow:0 0 0 1.5px #a8c5cc,0 5px 15px #082b3260;border-radius:15px}
+.seal2 path[stroke="#fff"]{stroke:#fff}.l2{color:#dce9ed;font-weight:500;font-size:15px;margin-top:8px}
+#tabs.tabs{max-width:760px;gap:13px}
+#tabs .tab{background:linear-gradient(145deg,#214c60,#143848)!important;border:1px solid #90aab5;border-radius:15px;box-shadow:0 7px 18px -12px #193b4b;min-height:135px;padding:17px 8px}
+#tabs .tab:nth-child(2n){background:linear-gradient(145deg,#255a53,#17473f)!important;border-color:#87a99f}
+#tabs .tab::before{background:linear-gradient(135deg,#b9ced5,#6f929b);padding:1px}.tab::after{opacity:.5}
+#tabs .tab b{font-size:15px;color:#fff}#tabs .tab small{color:#d0e2e6}
+#tabs .tab:hover{transform:translateY(-3px);box-shadow:0 12px 26px -15px #173d50}
+#tabs .pc{background:#e0ebee;color:#173d50}
+#tabs .ic,#tabs .util .ic{background:#ffffff14;box-shadow:inset 0 0 0 1px #a3bec688}
+#tabs .ic svg,#tabs .util .ic svg{color:#f5fafa}
+#tabs .ic svg [stroke="#e3b23c"]{stroke:#b4d4cd!important}#tabs .ic svg [fill="#e3b23c"]{fill:#b4d4cd!important}
+#tabs .ring .rb{stroke:#97b7bf55}#tabs .ring .rf,#tabs .ring .rf.full{stroke:#c2dfd5}
+#tabs .tab.util{background:#e2eaee!important;color:#173d50}#tabs .util b,#tabs .util small{color:#173d50}
+#tabs .util .ic{background:#fff8}#tabs .util .ic svg{color:#173d50}
+.credit2{color:#5d727e;font-size:14px}.credit2 strong{color:#173d50;background:none;-webkit-text-fill-color:currentColor;font-size:19px}
+.profile-toolbar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.profile-toolbar button{font-size:13px;padding:7px 18px;border-radius:8px;background:#fff;border-color:#9fb6c0;color:#173d50}
+.local-note{margin:8px auto 0;color:#617783;font-size:12px;max-width:600px;line-height:1.7}
+.view.on{background:#f2f6f8}
+.sheet-bar{background:linear-gradient(100deg,#173d50,#17473f);border-bottom:2px solid #9db8be;box-shadow:0 5px 15px #173d5020}
+.sheet-bar .by{color:#dfebee}.sheet-bar .x{background:#ffffff15;border-color:#aac1c8;color:white}
+.view .kicker,.criteria h3,.rg-h{color:#256a70}.view h1{color:#173d50}
+.view .bar{background:#7ba1a8}
+.view .card>h2,.card>h2{background:linear-gradient(90deg,#214c60,#173d50);border-bottom:1px solid #83a5ae}
+.card>h2 .chk.done{background:#d1e7dd;color:#17473f}
+section.card,.progress,.seq{background:#fff;border-color:#ccd7de;box-shadow:0 6px 20px -20px #173d50}
+.criteria,.rg-note{background:#edf4f5;border-color:#b7cdd3}.criteria h3{color:#256a70}
+.view .meter>i,.meter>i{background:linear-gradient(90deg,#25715a,#255f7b)}.meter{background:#e1e9ed}
+input,select,textarea{background:#fbfdfe;color:#183344;border-color:#c1d0d7;border-radius:7px}
+input:focus,select:focus,textarea:focus{outline-color:#487f88}
+button,.btn,.checks label,.chip,.seg{background:#eef3f5;color:#173d50;border-color:#bcced6}
+button.primary{background:#174e49;color:white;border-color:#174e49}
+button.gold,.chip.on,.step.done .num{background:#d6e5e9;color:#173d50;border-color:#92b0bb}
+button.ghost{background:transparent}.att .ref,.step .ref,.step.done b{color:#256a70}
+.step .num{background:#173d50;color:white;box-shadow:0 0 0 2px #a5c1ca}.step:hover{background:#edf3f5}
+.seg .n,.seg.on{background:#173d50;color:white;border-color:#8cabb7}.seg.on .n{background:#d4e5e9;color:#173d50}
+.seg .sb{background:#e1eaee;color:#536e7d}.rg-t thead th,.rg-t .cat{background:#173d50;color:white}
+.rg-t .rh{background:#e7eff2;color:#173d50}.rg-t,.rg-t th,.rg-t td{border-color:#c1d0d7}
+.modal .box{background:#fff;border-color:#b7cdd3}.toast{background:#174e49;color:white;border-radius:10px}
+.s-mid{background:#e8efda;color:#5c6c28}.sign{border-color:#879ca7}
+#profileModal h2{font-size:20px;margin:0 0 6px;color:#173d50}
+#profileModal .grid{gap:14px;margin:18px 0}
+#profileModal label{color:#415e6e;font-size:14px}
+#profileModal .profile-actions{display:flex;gap:9px;justify-content:flex-start}
+#profileModal .hint{color:#607985}
+#profileModal [role=dialog]{max-height:90dvh;overflow:auto}
+@media(max-width:600px){.home2{padding-inline:18px;gap:15px}.crest{padding:19px 12px}#tabs.tabs{gap:10px}#tabs .tab{min-height:125px;padding:16px 6px}.credit2{padding-bottom:8px}.local-note{font-size:11px}.profile-toolbar button{min-height:38px}.view.on{padding-inline:18px}.sheet-bar{padding-inline:18px}.profile-toolbar{gap:8px}.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}table{min-width:600px}.rg-t{min-width:640px}.body{overflow-x:auto}.sheet-bar .by{display:none}}
+@media print{.profile-toolbar,.local-note,#profileModal{display:none!important}.sheet-bar .by{display:block!important;color:#173d50}.sheet-bar{background:#fff}.view.on{background:white}.frame{display:none}.home2{display:none!important}.body{overflow:visible}table{min-width:0}.card>h2{background:#e5eef1!important;color:#173d50!important}}
+
+</style>
+</head>
+<body>
+<div class="frame" aria-hidden="true"></div>
+<div class="wrap">
+
+<!-- HOME -->
+<header class="home2">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="crest">
+    <div class="seal2"><svg viewBox="0 0 64 64"><defs><linearGradient id="chr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#b9c6d6"/><stop offset=".55" stop-color="#7d8ea6"/><stop offset="1" stop-color="#f4f7fb"/></linearGradient></defs><path d="M32 4 56 14v18c0 14-10 24-24 28C18 56 8 46 8 32V14z" fill="none" stroke="url(#chr)" stroke-width="3.5"/><path d="M21 33h22m0 0-7-7m7 7-7 7" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1 class="chrome">الأمن والسلامة</h1>
+    <div class="l2">تنفيذ خطط الإخلاء والتمارين الافتراضية في المدرسة</div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <a class="tab" href="#seq" data-v="v-seq" style="--c1:#ff9f1c;--c2:#ff3d6e">
+      <span class="pc" id="tpSeq">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgSeq"/></svg><i class="ic"><svg viewBox="0 0 64 64"><circle cx="12" cy="14" r="5" fill="#e3b23c"/><circle cx="12" cy="32" r="5" fill="currentColor"/><circle cx="12" cy="50" r="5" fill="currentColor"/><path d="M24 14h30M24 32h30M24 50h30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></i></span>
+      <b>تسلسل التنفيذ</b><small>سبع خطوات</small>
+    </a>
+    <a class="tab" href="#team" data-v="v-team" style="--c1:#22d3ee;--c2:#3b6cff">
+      <span class="pc" id="tpTm">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgTm"/></svg><i class="ic"><svg viewBox="0 0 64 64"><circle cx="32" cy="18" r="8" fill="#e3b23c"/><circle cx="14" cy="26" r="6" fill="currentColor"/><circle cx="50" cy="26" r="6" fill="currentColor"/><path d="M18 52c0-9 6-16 14-16s14 7 14 16M4 52c0-7 4-12 10-12M60 52c0-7-4-12-10-12" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></i></span>
+      <b>مصفوفة الفريق</b><small>نموذج (11)</small>
+    </a>
+    <a class="tab" href="#evac" data-v="v-evac" style="--c1:#2ee59d;--c2:#0ea5a4">
+      <span class="pc" id="tpEvac">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgEvac"/></svg><i class="ic"><svg viewBox="0 0 64 64"><rect x="8" y="14" width="30" height="40" rx="3" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M8 26h30M8 38h30M23 14v40" stroke="currentColor" stroke-width="2.5" opacity=".5"/><path d="M58 34H42m0 0 7-7m-7 7 7 7" fill="none" stroke="#e3b23c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+      <b>خطة الإخلاء</b><small>نموذج (2-1)</small>
+    </a>
+    <a class="tab" href="#student" data-v="v-student" style="--c1:#c084fc;--c2:#ec4899">
+      <span class="pc" id="tpSt">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgSt"/></svg><i class="ic"><svg viewBox="0 0 64 64"><circle cx="30" cy="11" r="6" fill="currentColor"/><path d="M30 19v18h14l6 14" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 27h12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="28" cy="45" r="12" fill="none" stroke="#e3b23c" stroke-width="4"/></svg></i></span>
+      <b>الخطة الفردية</b><small id="tsSt">نموذج (7)</small>
+    </a>
+    <a class="tab" href="#drill" data-v="v-drill" style="--c1:#ffd23f;--c2:#ff7a00">
+      <span class="pc" id="tpDr">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgDr"/></svg><i class="ic"><svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="20" fill="none" stroke="currentColor" stroke-width="4"/><path d="M26 8h12M32 8v8" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M32 36V24M32 36l8 6" stroke="#e3b23c" stroke-width="4" stroke-linecap="round"/></svg></i></span>
+      <b>إدارة التمرين</b><small>ثلاث مراحل</small>
+    </a>
+    <a class="tab" href="#commit" data-v="v-commit" style="--c1:#818cf8;--c2:#7c3aed">
+      <span class="pc" id="tpCm">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgCm"/></svg><i class="ic"><svg viewBox="0 0 64 64"><rect x="10" y="8" width="44" height="50" rx="6" fill="none" stroke="currentColor" stroke-width="4"/><path d="M20 24h24M20 34h16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="m34 46 6 6 12-14" fill="none" stroke="#e3b23c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+      <b>بطاقة الالتزام</b><small id="tsCm">نشاط 6</small>
+    </a>
+    <a class="tab" href="#reg" data-v="v-reg" style="--c1:#ff5f6d;--c2:#c81d4e">
+      <span class="pc" id="tpReg">0%</span>
+      <span class="rw"><svg class="ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="rb"/><circle cx="22" cy="22" r="19" class="rf" id="rgReg"/></svg><i class="ic"><svg viewBox="0 0 64 64"><path d="M14 6h28l10 10v42H14z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M42 6v10h10" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M33 26 44 31v7c0 6-5 10-11 12-6-2-11-6-11-12v-7z" fill="none" stroke="#e3b23c" stroke-width="3.5" stroke-linejoin="round"/></svg></i></span>
+      <b>سجل الأمن والسلامة</b><small>السجل المدرسي</small>
+    </a>
+    <button class="tab util" id="expBtn" type="button" style="--c1:#e9eef5;--c2:#8d9db3"><span class="rw"><i class="ic"><svg viewBox="0 0 64 64"><path d="M32 8v32m0 0-11-11m11 11 11-11M12 46v8h40v-8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span><b>تصدير نسخة</b><small>احتياطية</small></button>
+    <label class="tab util" style="--c1:#e9eef5;--c2:#8d9db3"><span class="rw"><i class="ic"><svg viewBox="0 0 64 64"><path d="M32 40V8m0 0L21 19M32 8l11 11M12 46v8h40v-8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span><b>استيراد نسخة</b><small>من ملف</small><input type="file" accept=".json,application/json" id="impIn" hidden></label>
+  </nav>
+  <div class="credit2"><span>إعداد:</span> <strong data-author>شيخه العتيبي</strong>
+  <div class="profile-toolbar"><button id="editNames" type="button">تعديل الأسماء</button></div>
+  <p class="local-note">جميع الأسماء والبيانات قابلة للتعديل. تُحفظ التغييرات على هذا الجهاز؛ استخدمي تصدير النسخة الاحتياطية لنقلها إلى جهاز آخر.</p></div>
+</header>
+
+<!-- EVAC 2-1 -->
+<div id="v-evac" class="view">
+<div class="kicker">الوحدة 3 | نشاط 3 — نموذج (2-1)</div>
+<h1>خطة الإخلاء والتمارين الافتراضية في المدرسة</h1>
+<div class="bar"></div>
+
+<div class="toolbar">
+  <button class="primary" id="evSave">💾 حفظ</button>
+  <button id="evHist">🗂 سجل الحفظ</button>
+  <button id="fillCase">تحميل نموذج الإجابة (مدرسة الحالة)</button>
+  <button class="gold" id="copyBtn">نسخ الخطة نصاً</button>
+  <button id="printBtn">طباعة</button>
+  <button class="ghost" id="clearBtn">مسح الكل</button>
+</div>
+
+<div class="progress">
+  <strong>اكتمال الخطة</strong>
+  <div class="meter"><i id="meterFill"></i></div>
+  <span class="pct" id="pct">0%</span>
+  <span class="status s-no" id="statusPill">غير مكتملة</span>
+</div>
+
+<section class="card" data-sec="1">
+  <h2>أولاً: بيانات المقر <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>اسم المدرسة</label><input data-k="school" data-req></div>
+    <div><label>عدد أدوار المبنى</label><input type="number" min="1" data-k="floors" data-req></div>
+    <div><label>عدد الطلاب</label><input type="number" min="0" data-k="students" data-req></div>
+    <div><label>عدد المنسوبين</label><input type="number" min="0" data-k="staff" data-req></div>
+    <div><label>عدد المخارج</label><input type="number" min="1" data-k="exits" data-req></div>
+    <div class="full"><div class="hint">إجمالي الشاغلين: <b id="occ">0</b></div></div>
+  </div>
+</section>
+
+<section class="card" data-sec="2">
+  <h2>ثانياً: التصنيف والهدف <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>التصنيف</label><input data-k="risk" data-req placeholder="مثال: متوسط"></div>
+    <div><label>مبررات التصنيف</label><input data-k="riskWhy" data-req placeholder="مثال: قرب طريق تجاري، ومن 300 إلى 700 شاغل"></div>
+    <div><label>الهدف: عدد التمارين في الفصل</label><input type="number" min="1" data-k="drills" data-req></div>
+  </div>
+</section>
+
+<section class="card" data-sec="3">
+  <h2>ثالثاً: الإنذار والإطفاء والإسعاف <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>وسائل الإنذار</label><input data-k="alarms" data-req placeholder="مثال: جرس يدوي ونداء صوتي"></div>
+    <div><label>طفايات الحريق</label><input data-k="ext" data-req placeholder="مثال: طفايتان لكل دور"></div>
+    <div><label>حقائب الإسعاف</label><input data-k="aid" data-req placeholder="مثال: حقيبتا إسعاف"></div>
+    <div><label>تاريخ آخر صيانة</label><input type="date" data-k="maint" data-req></div>
+  </div>
+</section>
+
+<section class="card" data-sec="4">
+  <h2>رابعاً: المخارج والتجمع والمخطط <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>نقطة التجمع الرئيسة</label><input data-k="mainPt" data-req placeholder="مثال: الساحة الجنوبية"></div>
+    <div><label>مساحتها (م²)</label><input type="number" min="0" data-k="mainArea" data-req></div>
+    <div><label>نقطة التجمع البديلة</label><input data-k="altPt" data-req placeholder="مثال: ساحة المسجد"></div>
+    <div><label>سند استخدام البديلة</label><input data-k="altDoc" data-req placeholder="مثال: باتفاق مكتوب"></div>
+    <div class="full">
+      <label>الكروكي (مرفق)</label>
+      <input type="file" accept="image/*" id="sketchIn">
+      <img id="sketchImg" class="sketch" alt="الكروكي">
+    </div>
+  </div>
+</section>
+
+<section class="card" data-sec="5">
+  <h2>خامساً: المهام والمجموعات <span class="chk"></span></h2>
+  <div class="body">
+    <table id="teamTbl">
+      <thead><tr><th style="width:28%">المهمة / الفريق</th><th>الاسم</th><th>البديل</th><th style="width:40px"></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <button class="addrow" id="addRole" style="margin-top:10px">+ إضافة فريق</button>
+    <a class="back" href="#team" style="display:block;font-size:13px;color:var(--gold);margin-top:8px">← مصفوفة الفريق التفصيلية (نموذج 11)</a>
+  </div>
+</section>
+
+<section class="card" data-sec="6">
+  <h2>سادساً: التنفيذ والبلاغ <span class="chk"></span></h2>
+  <div class="body">
+    <label>خطوات التنفيذ عند الإنذار</label>
+    <ol class="steps" id="steps"></ol>
+    <button class="addrow" id="addStep">+ إضافة خطوة</button>
+    <div class="grid" style="margin-top:12px">
+      <div><label>البلاغ</label><input data-k="phones" data-req placeholder="مثال: 998 أو 911"></div>
+      <div><label>مؤشر الزمن</label><input data-k="timeKpi" data-req placeholder="زمن الإخلاء المستهدف"></div>
+      <div><label>خط الأساس</label><input data-k="baseline" data-req placeholder="زمن التمرين الأول"></div>
+    </div>
+  </div>
+</section>
+
+<section class="card" data-sec="7">
+  <h2>سابعاً: الاعتماد <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>مدير المدرسة</label><input data-k="principal" data-req><div class="sign"></div><div class="hint">التوقيع</div></div>
+    <div><label>بمشاركة فريق الأمن والسلامة والمرافق</label><input data-k="safety" data-req><div class="sign"></div><div class="hint">التوقيع</div></div>
+    <div><label>وفريق الاستجابة الأولية</label><input data-k="responder" data-req><div class="sign"></div><div class="hint">التوقيع</div></div>
+  </div>
+</section>
+
+<section class="card" data-sec="8">
+  <h2>المرفقات <span class="chk"></span></h2>
+  <div class="body">
+    <label class="att"><input type="checkbox" data-k="attSketch" data-req-box><b>الكروكي</b><span>نموذج (3)</span></label>
+    <label class="att"><input type="checkbox" data-k="attTeam" data-req-box><b>مصفوفة الفريق</b><span>نموذج (11)</span></label>
+    <label class="att"><input type="checkbox" data-k="attIndiv" data-req-box><b>خطة فردية للطالب</b><span>نموذج (7)</span></label>
+    <div class="hint" id="indivHint"></div>
+    <a class="back" href="#student" style="font-size:13px;color:var(--gold)">← فتح الخطط الفردية (نموذج 7)</a>
+  </div>
+</section>
+
+<div class="criteria">
+  <h3>معايير القبول قبل الاعتماد</h3>
+  <div id="critList"></div>
+  <div class="verdict s-no" id="verdict">—</div>
+  <div class="grid" style="margin-top:10px">
+    <div><label>الملاحظات المحددة (عند الإعادة)</label><textarea data-k="notes"></textarea></div>
+    <div><label>مدة المعالجة</label><input data-k="fixDays" placeholder="مثال: أسبوع"></div>
+  </div>
+</div>
+<div class="criteria cl">
+  <h3>قائمة التحقق — تقييم الأداء <small class="src">مصدره: نشاط 3</small></h3>
+  <div id="evCL"></div>
+  <div class="verdict" id="evRate">—</div>
+  <div class="hint">آلية التقييم: يُقيَّم المنتج بالقائمة المعلنة: مستوفٍ، أو مستوفٍ جزئياً مع ملاحظات محددة، أو غير مستوفٍ يُعاد لمعالجته.</div>
+</div>
+</div><!-- /v-evac -->
+
+<!-- STUDENT 7 -->
+<div id="v-student" class="view">
+<div class="kicker">الوحدة 3 | نشاط 3 — نموذج (7)</div>
+<h1>الخطة الفردية للطالب</h1>
+<div class="bar"></div>
+
+<div class="secret">🔒 بيانات الخطة سرية لا يطّلع عليها إلا المكلّفون.</div>
+
+<div class="toolbar">
+  <button class="primary" id="stSave">💾 حفظ</button>
+  <button id="stHist">🗂 سجل الحفظ</button>
+  <button id="stNew">+ طالب جديد</button>
+  <button id="stCase">تحميل نموذج الإجابة</button>
+  <button class="gold" id="stCopy">نسخ خطة الطالب</button>
+  <button id="stPrint">طباعة</button>
+  <button class="ghost" id="stDel">حذف هذا الطالب</button>
+</div>
+
+<div class="chips" id="stChips"></div>
+
+<div class="progress">
+  <strong>اكتمال خطة الطالب</strong>
+  <div class="meter"><i id="stMeter"></i></div>
+  <span class="pct" id="stPct">0%</span>
+  <span class="status s-no" id="stStatus">غير مكتملة</span>
+</div>
+
+<div style="margin-top:14px;max-width:360px"><label>اسم الطالب</label><input data-s="name" data-sreq></div>
+
+<section class="card st">
+  <h2>المسار والمساندة <span class="chk"></span></h2>
+  <div class="body grid">
+    <div class="full"><label>المسار الأساسي</label><input data-s="pathMain" data-sreq placeholder="مثال: باب الفصل 2/ب ثم الممر إلى أقرب مخرج أرضي خالٍ من الدرج"></div>
+    <div class="full"><label>المسار البديل</label><input data-s="pathAlt" data-sreq placeholder="مثال: المخرج الآخر أو منطقة انتظار آمنة"></div>
+    <div><label>المساند الأول</label><input data-s="helper1" data-sreq placeholder="مثال: معلم الفصل"></div>
+    <div><label>وسيلة اتصاله</label><input data-s="helperTel" data-sreq></div>
+    <div><label>المساند البديل</label><input data-s="helper2" data-sreq placeholder="مثال: معلم الفصل المجاور"></div>
+  </div>
+</section>
+
+<section class="card st">
+  <h2>الاحتياج والاستجابة <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>الاحتياج</label><input data-s="need" data-sreq placeholder="مثال: احتياج حركي (كرسي متحرك)"></div>
+    <div><label>الاحتياج الطبي والدواء إن وُجدا (يُستوفى مع الأسرة)</label><input data-s="med" placeholder="اتركه فارغاً إن لم يوجد"></div>
+  </div>
+</section>
+
+<section class="card st">
+  <h2>التنبيه والإخلاء <span class="chk"></span></h2>
+  <div class="body grid">
+    <div><label>التنبيه</label><input data-s="alert" data-sreq placeholder="مثال: الجرس مع تنبيه مباشر من المساند"></div>
+    <div><label>الإخلاء</label><input data-s="method" data-sreq placeholder="مثال: دفع الكرسي عبر المسار الأرضي دون درج"></div>
+    <div><label>موقعه المعلوم في نقطة التجمع</label><input data-s="spot" data-sreq placeholder="مثال: موقع معلوم في الساحة الجنوبية"></div>
+    <div><label>التواصل</label><input data-s="comm" data-sreq placeholder="مثال: بجهاز الاتصال المحدد"></div>
+  </div>
+</section>
+
+<section class="card st">
+  <h2>التجربة والموافقة <span class="chk"></span></h2>
+  <div class="body grid">
+    <div class="checks full">
+      <label><input type="checkbox" data-s="trial" data-sreq-box> تجربة الخطة موثقة</label>
+      <label><input type="checkbox" data-s="consent" data-sreq-box> تمت الموافقة على الخطة</label>
+    </div>
+    <div><label>تاريخ التجربة</label><input type="date" data-s="trialDate"></div>
+  </div>
+</section>
+
+<div class="criteria">
+  <h3>معيار القبول</h3>
+  <div id="stCrit"></div>
+  <div class="verdict s-no" id="stVerdict">—</div>
+</div>
+<div class="criteria cl">
+  <h3>قائمة التحقق — تقييم الأداء <small class="src">مصدره: نشاط 3</small></h3>
+  <div id="stCL"></div>
+  <div class="verdict" id="stRate">—</div>
+  <div class="hint">آلية التقييم: يُقيَّم المنتج بالقائمة المعلنة: مستوفٍ، أو مستوفٍ جزئياً مع ملاحظات محددة، أو غير مستوفٍ يُعاد لمعالجته.</div>
+</div>
+</div><!-- /v-student -->
+
+<!-- DRILL -->
+<div id="v-drill" class="view">
+<div class="kicker">الوحدة 5 | إدارة التمرين</div>
+<h1>أدر التمرين في ثلاث مراحل</h1>
+<div class="bar"></div>
+
+<div class="toolbar">
+  <button class="primary" id="drSave">💾 حفظ</button>
+  <button id="drHist">🗂 سجل الحفظ</button>
+  <button class="gold" id="drCopy">نسخ نصاً</button>
+  <button id="drPrint">طباعة</button>
+  <button class="ghost" id="drClear">مسح الكل</button>
+</div>
+
+<div class="progress">
+  <strong>إنجاز التمرين</strong>
+  <div class="meter"><i id="drMeter"></i></div>
+  <span class="pct" id="drPct">0%</span>
+  <span class="status s-no" id="drStatus">قبل التمرين</span>
+</div>
+
+<div class="phases">
+  <section class="card phase" data-ph="0">
+    <h2>قبل التمرين <span class="chk"></span></h2>
+    <div class="body">
+      <label class="att"><input type="checkbox" data-dr="0"><b>اعتمد السيناريو والهدف والموعد</b></label>
+      <label class="att"><input type="checkbox" data-dr="1"><b>كلّف المراقبين بما يرصدونه</b></label>
+      <label class="att"><input type="checkbox" data-dr="2"><b>افحص المسارات</b><span>النموذج (6)</span></label>
+      <label class="att"><input type="checkbox" data-dr="3"><b>فعّل الخطط الفردية</b><a class="ref" href="#student">النموذج (7)</a></label>
+    </div>
+  </section>
+  <section class="card phase" data-ph="1">
+    <h2>أثناء التمرين <span class="chk"></span></h2>
+    <div class="body">
+      <label class="att"><input type="checkbox" data-dr="4"><b>أطلق الإنذار وابدأ القياس</b></label>
+      <label class="att"><input type="checkbox" data-dr="5"><b>راقب المخارج وأداء الفرق</b></label>
+      <label class="att"><input type="checkbox" data-dr="6"><b>سجّل الأزمنة الثلاثة</b></label>
+      <label class="att"><input type="checkbox" data-dr="7"><b>احصر وارفع النتيجة</b><span>النموذج (17)</span></label>
+    </div>
+  </section>
+  <section class="card phase" data-ph="2">
+    <h2>بعد التمرين <span class="chk"></span></h2>
+    <div class="body">
+      <label class="att"><input type="checkbox" data-dr="8"><b>حرّر محضر التجربة فوراً</b><a class="ref" href="javascript:void 0" id="toReport">التقرير ↓</a></label>
+      <label class="att"><input type="checkbox" data-dr="9"><b>اعقد جلسة ما بعد التمرين</b></label>
+      <label class="att"><input type="checkbox" data-dr="10"><b>سجّل الملاحظات</b><span>النموذج (14)</span></label>
+      <label class="att"><input type="checkbox" data-dr="11"><b>قيّم التمرين</b><span>النموذج (15)</span></label>
+    </div>
+  </section>
+</div>
+
+<section class="card">
+  <h2>أسئلة جلسة ما بعد التمرين <span class="chk" id="aarChk"></span></h2>
+  <div class="body" style="overflow-x:auto">
+    <table id="aarTbl" style="min-width:760px">
+      <thead><tr><th>ما المتوقع؟</th><th>ماذا حدث؟</th><th>لماذا؟</th><th>ما الذي سيتغير؟</th><th>من يغلق الملاحظة؟</th><th>وما دليل الإغلاق؟</th><th style="width:36px"></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <button class="addrow" id="addAar" style="margin-top:10px">+ إضافة ملاحظة</button>
+  </div>
+</section>
+
+<section class="card" id="rpCard">
+  <h2>تقرير تجربة الإخلاء الفرضية <span class="chk" id="rpChk"></span></h2>
+  <div class="body">
+    <div class="hint" style="margin:0 0 10px">المصدر: سجل الأمن والسلامة 1448هـ — قسم الأمن والسلامة والمرافق، إدارة السجل المدرسي</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+      <div class="chips" id="rpChips" style="margin:0"></div>
+      <button id="rpNew" style="padding:5px 12px;font-size:13px">+ تجربة جديدة</button>
+      <button class="ghost" id="rpDel" style="padding:5px 12px;font-size:13px">حذف هذه التجربة</button>
+    </div>
+    <div class="grid">
+      <div><label>تقرير تجربة الإخلاء الفرضية رقم</label><input type="number" min="1" data-r="no"></div>
+      <div><label>الفصل الدراسي</label><input data-r="term"></div>
+      <div><label>تاريخ التنفيذ</label><input type="date" data-r="date"></div>
+      <div><label>عدد الطلاب</label><input type="number" min="0" data-r="students"></div>
+      <div><label>عدد طلاب التربية الخاصة</label><input type="number" min="0" data-r="special"></div>
+      <div><label>عدد الهيئة التعليمية والإدارية</label><input type="number" min="0" data-r="staff"></div>
+      <div><label>الزمن المستغرق في عملية الإخلاء</label><input data-r="time"></div>
+      <div class="full"><label>الإيجابيات</label><textarea data-r="pos"></textarea></div>
+      <div class="full"><label>السلبيات</label><textarea data-r="neg"></textarea></div>
+      <div><label>تم الرفع بتنفيذ خطة الإخلاء</label><select data-r="up"><option value="">— اختر —</option><option>نعم</option><option>لا</option></select></div>
+      <div><label>الرابط المرسل لإدارة التعليم</label><input data-r="link" dir="ltr"></div>
+      <div><label>مدير المدرسة</label><input data-r="principal"><div class="sign"></div><div class="hint">التوقيع</div></div>
+      <div><label>مسؤول الأمن والسلامة</label><input data-r="safety"><div class="sign"></div><div class="hint">التوقيع</div></div>
+    </div>
+  </div>
+</section>
+</div><!-- /v-drill -->
+
+<!-- SEQUENCE -->
+<div id="v-seq" class="view">
+<div class="kicker">تسلسل التنفيذ</div>
+<h1>من أين تبدأ مدرستك؟ سبع خطوات بالترتيب</h1>
+<div class="bar"></div>
+
+<div class="toolbar">
+  <button class="primary" id="sqSave">💾 حفظ</button>
+  <button id="sqHist">🗂 سجل الحفظ</button>
+  <button class="gold" id="sqCopy">نسخ نصاً</button>
+  <button id="sqPrint">طباعة</button>
+  <button class="ghost" id="sqClear">مسح الكل</button>
+</div>
+
+<div class="progress">
+  <strong>إنجاز التسلسل</strong>
+  <div class="meter"><i id="sqMeter"></i></div>
+  <span class="pct" id="sqPct">0%</span>
+  <span class="status s-no" id="sqStatus">—</span>
+</div>
+
+<div class="seq" id="seqList"></div>
+
+<div class="criteria">
+  <div>التنفيذ معجّل ومستمر، والخطة الزمنية التفصيلية تعدّها إدارة التعليم؛ والتسلسل المعروض مقترح للبدء.</div>
+</div>
+</div><!-- /v-seq -->
+
+<!-- TEAM 11 -->
+<div id="v-team" class="view">
+<div class="kicker">نشاط 1 — نموذج (11)</div>
+<h1>مصفوفة الفريق</h1>
+<div class="bar"></div>
+<div class="toolbar">
+  <button class="primary" id="tmSave">💾 حفظ</button>
+  <button id="tmHist">🗂 سجل الحفظ</button>
+  <button class="gold" id="tmCopy">نسخ نصاً</button>
+  <button id="tmPrint">طباعة</button>
+  <button class="ghost" id="tmClear">مسح الكل</button>
+</div>
+<div class="progress">
+  <strong>اكتمال المصفوفة</strong>
+  <div class="meter"><i id="tmMeter"></i></div>
+  <span class="pct" id="tmPct">0%</span>
+  <span class="status s-no" id="tmStatus">غير مكتملة</span>
+</div>
+
+<section class="card" id="tmCard">
+  <h2>الأدوار والتكليف <span class="chk" id="tmChk"></span></h2>
+  <div class="body" style="overflow-x:auto">
+    <table id="tmTbl" style="min-width:820px">
+      <thead><tr><th>الدور</th><th>المسؤول الأساسي</th><th>البديل</th><th>الموقع</th><th>الاتصال</th><th>المهمة عند التفعيل</th><th style="width:36px"></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <button class="addrow" id="tmAdd" style="margin-top:10px">+ إضافة دور</button>
+    <div class="hint" id="tmDup"></div>
+  </div>
+</section>
+<section class="card">
+  <h2>الإشراف على الصفوف <span class="chk" id="tmChk2"></span></h2>
+  <div class="body checks">
+    <label><input type="checkbox" id="tmNoGap"> تم التحقق: لا صف بلا إشراف</label>
+  </div>
+</section>
+<div class="criteria cl">
+  <h3>قائمة التحقق — تقييم الأداء <small class="src">مصدره: نشاط 1</small></h3>
+  <div id="tmCL"></div>
+  <div class="verdict" id="tmRate">—</div>
+  <div class="hint">آلية التقييم: يُقيَّم المنتج بالقائمة المعلنة: مستوفٍ، أو مستوفٍ جزئياً مع ملاحظات محددة، أو غير مستوفٍ يُعاد لمعالجته.</div>
+</div>
+</div><!-- /v-team -->
+
+<!-- COMMIT -->
+<div id="v-commit" class="view">
+<div class="kicker">الختام | نشاط 6</div>
+<h1>خطة عملك وبطاقة التزامك</h1>
+<div class="bar"></div>
+<div class="toolbar">
+  <button class="primary" id="cmSave">💾 حفظ</button>
+  <button id="cmHist">🗂 سجل الحفظ</button>
+  <button class="gold" id="cmCopy">نسخ نصاً</button>
+  <button id="cmPrint">طباعة</button>
+  <button class="ghost" id="cmClear">مسح الكل</button>
+</div>
+<div class="progress">
+  <strong>اكتمال البطاقة</strong>
+  <div class="meter"><i id="cmMeter"></i></div>
+  <span class="pct" id="cmPct">0%</span>
+  <span class="status s-no" id="cmStatus">غير مكتملة</span>
+</div>
+
+<div class="criteria" style="margin-top:14px">
+  <h3>بطاقة الالتزام</h3>
+  <div>استرجع تقديرك لجاهزية مدرستك على العناصر الأربعة وأحد عشر مؤشراً <span class="hint">(قِس الجاهزية — نموذج 1)</span>.</div>
+  <div>اختر ثلاثة إجراءات تنجزها خلال ستة أسابيع، تبدأ بالأضعف.</div>
+  <div class="hint" style="margin-top:6px">تُجمع بطاقات الالتزام في سجل متابعة موحد بالتنسيق مع قسم الأمن والسلامة والمرافق بإدارة التعليم، لمتابعة تنفيذ الإجراءات وقياس أثر التدريب.</div>
+</div>
+<section class="card">
+  <h2>بيانات البطاقة <span class="chk" id="cmChk1"></span></h2>
+  <div class="body grid">
+    <div><label>اسم المدرسة</label><input id="cmSchool"></div>
+    <div><label>تاريخ بدء الالتزام</label><input type="date" id="cmStart"><div class="hint" id="cmLimit"></div></div>
+  </div>
+</section>
+<section class="card">
+  <h2>الإجراءات الثلاثة <span class="chk" id="cmChk2"></span></h2>
+  <div class="body" style="overflow-x:auto">
+    <table id="cmTbl" style="min-width:760px">
+      <thead><tr><th style="width:30px">#</th><th>الإجراء</th><th>المسؤول</th><th style="width:150px">الموعد</th><th>دليل الإنجاز</th><th style="width:60px">أُنجز</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+<div class="criteria">
+  <h3>المعيار</h3>
+  <div id="cmCrit"></div>
+  <div class="verdict s-no" id="cmVerdict">—</div>
+</div>
+</div><!-- /v-commit -->
+
+<!-- REGISTRY -->
+<div id="v-reg" class="view">
+<div class="kicker">إدارة السجل المدرسي — قسم الأمن والسلامة والمرافق</div>
+<h1>سجل الأمن والسلامة للعام الدراسي 1448هـ</h1>
+<div class="bar"></div>
+<div class="toolbar">
+  <button class="primary" id="rgSave">💾 حفظ</button>
+  <button id="rgHist">🗂 سجل الحفظ</button>
+  <button class="gold" id="rgCopy">نسخ النموذج نصاً</button>
+  <button id="rgPrint">طباعة النموذج</button>
+  <button class="ghost" id="rgClear">مسح النموذج</button>
+</div>
+<div class="segs" id="rgSegs"></div>
+<div class="progress">
+  <strong id="rgPTitle">اكتمال النموذج</strong>
+  <div class="meter"><i id="rgMeter"></i></div>
+  <span class="pct" id="rgPct">0%</span>
+  <span class="status s-no" id="rgStatus">—</span>
+</div>
+<div id="rgPanels"></div>
+</div><!-- /v-reg -->
+
+
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="hModal"><div class="box wide">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b id="hTitle" style="font-size:17px">سجل الحفظ</b><button id="hClose">إغلاق</button></div>
+  <div id="hList"></div></div></div>
+<div class="modal" id="modal"><div class="box"><p id="modalMsg"></p>
+  <div style="display:flex;gap:8px;justify-content:flex-end"><button id="mNo">إلغاء</button><button class="primary" id="mYes">تأكيد</button></div></div></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const STORE='evac_plan_2_1', SKEY='evac_students_7', HKEY='evac_history_v1';
+const DEFAULT_ROLES=['قائد الإخلاء','الحصر','التواصل الخارجي'];
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function confirmBox(msg,cb){$('#modalMsg').textContent=msg;$('#modal').classList.add('open');
+  $('#mYes').onclick=()=>{$('#modal').classList.remove('open');cb()};$('#mNo').onclick=()=>$('#modal').classList.remove('open');}
+function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+const doPrint=()=>{try{window.print()}catch(e){toast('تعذّرت الطباعة')}};
+
+/* ===== shared rating ===== */
+const hasVal=v=>v===true||(typeof v==='string'&&v.trim()!=='');
+function rateBox(pre,items){
+  $('#'+pre+'CL').innerHTML=items.map(c=>`<div class="crit"><span class="dot ${c[1]?'ok':'no'}">${c[1]?'✓':'✕'}</span>${c[0]}</div>`).join('');
+  const n=items.filter(c=>c[1]).length,v=$('#'+pre+'Rate');
+  const r=n===items.length?['مستوفٍ','s-ok']:n>0?['مستوفٍ جزئياً — مع ملاحظات محددة','s-mid']:['غير مستوفٍ — يُعاد لمعالجته','s-no'];
+  v.className='verdict '+r[1];v.textContent='التقييم: '+r[0];return n===items.length}
+
+/* ===== Evac 2-1 ===== */
+function addRole(role='',who='',alt=''){
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td><input class="r-role" value="${esc(role)}"></td><td><input class="r-who" value="${esc(who)}" placeholder="الاسم"></td><td><input class="r-alt" value="${esc(alt)}" placeholder="البديل"></td><td><button class="del" title="حذف">×</button></td>`;
+  tr.querySelector('.del').onclick=()=>{tr.remove();update()};
+  $('#teamTbl tbody').appendChild(tr);
+}
+function addStep(txt=''){
+  const li=document.createElement('li');
+  li.innerHTML=`<input class="s-txt" value="${esc(txt)}" placeholder="اكتب الخطوة"><button class="del" title="حذف">×</button>`;
+  li.querySelector('.del').onclick=()=>{li.remove();update()};
+  $('#steps').appendChild(li);
+}
+$('#addRole').onclick=()=>{addRole();update()};
+$('#addStep').onclick=()=>{addStep();update()};
+
+function collect(){
+  const d={};
+  $$('[data-k]').forEach(el=>{d[el.dataset.k]=el.type==='checkbox'?el.checked:el.value});
+  d.roles=$$('#teamTbl tbody tr').map(tr=>[tr.querySelector('.r-role').value,tr.querySelector('.r-who').value,tr.querySelector('.r-alt').value]);
+  d.steps=$$('#steps .s-txt').map(i=>i.value);
+  return d;
+}
+function apply(d){
+  $$('[data-k]').forEach(el=>{const v=d[el.dataset.k];
+    if(el.type==='checkbox')el.checked=!!v;else el.value=(typeof v==='string'||typeof v==='number')?v:''});
+  $('#teamTbl tbody').innerHTML='';(d.roles&&d.roles.length?d.roles:DEFAULT_ROLES.map(r=>[r,'',''])).forEach(r=>addRole(...r));
+  $('#steps').innerHTML='';(d.steps&&d.steps.length?d.steps:['']).forEach(s=>addStep(s));
+  const im=$('#sketchImg');
+  if(d.sketch){im.src=d.sketch;im.style.display='block'}else{im.removeAttribute('src');im.style.display='none'}
+  update();
+}
+const hasSketch=()=>$('#sketchImg').style.display==='block';
+
+function update(){
+  const d=collect();
+  const occ=(+d.students||0)+(+d.staff||0);
+  $('#occ').textContent=occ;
+  let total=0,filled=0;
+  $$('#v-evac section.card').forEach(sec=>{
+    let t=0,f=0;
+    sec.querySelectorAll('[data-req]').forEach(el=>{t++;if(String(el.value).trim()!=='')f++});
+    sec.querySelectorAll('[data-req-box]').forEach(b=>{t++;if(b.checked)f++});
+    if(sec.dataset.sec==='5'){t+=d.roles.length;f+=d.roles.filter(r=>r[0].trim()&&r[1].trim()&&r[2].trim()).length}
+    if(sec.dataset.sec==='6'){t++;if(d.steps.some(s=>s.trim()))f++}
+    if(sec.dataset.sec==='4'){t++;if(hasSketch())f++}
+    const c=sec.querySelector('.chk');c.textContent=f+'/'+t;c.classList.toggle('done',t>0&&f===t);
+    total+=t;filled+=f;
+  });
+  const p=total?Math.round(filled/total*100):0;
+  $('#meterFill').style.width=p+'%';$('#pct').textContent=p+'%';
+  const crits=[
+    ['استيفاء العناصر كاملة',p===100],
+    ['المطابقة لواقع المبنى وشاغليه',!!(d.school.trim()&&+d.floors>0&&occ>0&&+d.exits>0)],
+    ['وضوح المخطط ونقاط التجمع',!!(d.mainPt.trim()&&d.altPt.trim()&&hasSketch())],
+    ['تسمية الفرق',d.roles.length>0&&d.roles.every(r=>r[0].trim()&&r[1].trim()&&r[2].trim())]
+  ];
+  $('#critList').innerHTML=crits.map(c=>`<div class="crit"><span class="dot ${c[1]?'ok':'no'}">${c[1]?'✓':'✕'}</span>${c[0]}</div>`).join('');
+  const ok=crits.every(c=>c[1]);
+  const v=$('#verdict');v.className='verdict '+(ok?'s-ok':'s-no');
+  v.textContent=ok?'المعايير مستوفاة — الخطة جاهزة للاعتماد':'لم تُستوفَ المعايير — تُعاد الخطة بملاحظات محددة ومدة لمعالجتها';
+  const sp=$('#statusPill');sp.className='status '+(ok?'s-ok':'s-no');sp.textContent=ok?'جاهزة للاعتماد':'غير مكتملة';
+  const secDone=n=>{const c=$(`#v-evac section.card[data-sec="${n}"] .chk`);return c&&c.classList.contains('done')};
+  rateBox('ev',[
+    ['الأقسام السبعة مكتملة ومطابقة لواقع المقر',[1,2,3,4,5,6,7].every(secDone)],
+    ['نقطتا تجمع مستوفيتان',!!(d.mainPt.trim()&&d.mainArea.trim()&&d.altPt.trim()&&d.altDoc.trim())],
+    ['المرفقات',!!(d.attSketch&&d.attTeam&&d.attIndiv)],
+    ['الاعتماد',!!(d.principal.trim()&&d.safety.trim()&&d.responder.trim())]]);
+  try{localStorage.setItem(STORE,JSON.stringify(Object.assign(d,{sketch:hasSketch()?$('#sketchImg').src:''})))}catch(e){}
+  hubRender();
+}
+$('#v-evac').addEventListener('input',update);$('#v-evac').addEventListener('change',update);
+
+$('#sketchIn').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{const im=$('#sketchImg');im.src=r.result;im.style.display='block';update()};r.readAsDataURL(f)};
+
+const CASE={school:'ابتدائية النخيل',floors:'2',students:'420',staff:'36',exits:'3',
+  risk:'متوسط',riskWhy:'قرب طريق تجاري، ومن 300 إلى 700 شاغل',drills:'3',
+  alarms:'جرس يدوي ونداء صوتي',ext:'طفايتان لكل دور',aid:'حقيبتا إسعاف',maint:'',
+  mainPt:'الساحة الجنوبية',mainArea:'400',altPt:'ساحة المسجد',altDoc:'باتفاق مكتوب',
+  roles:[['قائد الإخلاء','',''],['الحصر','',''],['التواصل الخارجي','','']],
+  steps:[''],
+  phones:'998 أو 911',timeKpi:'',baseline:'',principal:'',safety:'',responder:'',
+  attSketch:true,attTeam:true,attIndiv:true,notes:'',fixDays:''};
+$('#fillCase').onclick=()=>confirmBox('سيُستبدل ما في النموذج ببيانات مدرسة الحالة (ابتدائية النخيل). متابعة؟',()=>{apply(CASE);toast('حُمّل نموذج الإجابة')});
+$('#clearBtn').onclick=()=>confirmBox('سيُمسح كل ما عبّأته في النموذج. متابعة؟',()=>{$('#sketchIn').value='';apply({});toast('تم المسح')});
+$('#copyBtn').onclick=async()=>{
+  const d=collect(),occ=(+d.students||0)+(+d.staff||0),y=b=>b?'مرفق':'غير مرفق';
+  const L=['نموذج (2-1) — خطة الإخلاء والتمارين الافتراضية',
+   `أولاً: بيانات المقر: ${d.school}؛ مبنى من ${d.floors} أدوار؛ ${d.students} طالباً و${d.staff} منسوباً (${occ} شاغلاً)؛ ${d.exits} مخارج`,
+   `ثانياً: التصنيف والهدف: ${d.risk} (${d.riskWhy})؛ ${d.drills} تمارين في الفصل`,
+   `ثالثاً: الإنذار والإطفاء والإسعاف: ${d.alarms}؛ ${d.ext}؛ ${d.aid}؛ تاريخ آخر صيانة: ${d.maint}`,
+   `رابعاً: المخارج والتجمع والمخطط: الرئيسة: ${d.mainPt} (${d.mainArea} م²)؛ البديلة: ${d.altPt} ${d.altDoc}؛ الكروكي: ${y(hasSketch())}`,
+   'خامساً: المهام والمجموعات:',...d.roles.map(r=>`  - ${r[0]}: ${r[1]} | البديل: ${r[2]}`),
+   'سادساً: التنفيذ والبلاغ:',...d.steps.filter(s=>s.trim()).map((s,i)=>`  ${i+1}. ${s}`),
+   `  البلاغ: ${d.phones}؛ مؤشر الزمن: ${d.timeKpi}؛ خط الأساس: ${d.baseline}`,
+   `سابعاً: الاعتماد: مدير المدرسة ${d.principal}، بمشاركة فريق الأمن والسلامة والمرافق ${d.safety}، وفريق الاستجابة الأولية ${d.responder}`,
+   `المرفقات: الكروكي نموذج (3): ${y(d.attSketch)}؛ مصفوفة الفريق نموذج (11): ${y(d.attTeam)}؛ خطة فردية للطالب نموذج (7): ${y(d.attIndiv)}`,
+   `الحكم: ${$('#verdict').textContent}`, d.notes?`الملاحظات: ${d.notes} — مدة المعالجة: ${d.fixDays}`:''
+  ].filter(Boolean).join('\n');
+  try{await navigator.clipboard.writeText(L);toast('نُسخت الخطة')}catch(e){toast('تعذّر النسخ')}
+};
+$('#printBtn').onclick=doPrint;
+
+/* ===== Student 7 ===== */
+let students=[],cur=0;
+function sCollect(){const d={};$$('[data-s]').forEach(el=>d[el.dataset.s]=el.type==='checkbox'?el.checked:el.value);return d}
+function sApply(d){$$('[data-s]').forEach(el=>{const v=d[el.dataset.s];if(el.type==='checkbox')el.checked=!!v;else el.value=typeof v==='string'?v:''})}
+const S_REQ=['name','pathMain','pathAlt','helper1','helperTel','helper2','need','alert','method','spot','comm'];
+const S_BOX=['trial','consent'];
+const sOk=d=>S_REQ.every(k=>String(d[k]||'').trim())&&S_BOX.every(k=>d[k]===true);
+function sRender(){
+  const d=sCollect();students[cur]=d;
+  $$('#v-student section.card').forEach(sec=>{let t=0,f=0;
+    sec.querySelectorAll('[data-sreq]').forEach(el=>{t++;if(String(el.value).trim())f++});
+    sec.querySelectorAll('[data-sreq-box]').forEach(el=>{t++;if(el.checked)f++});
+    const c=sec.querySelector('.chk');c.textContent=f+'/'+t;c.classList.toggle('done',f===t)});
+  const f=S_REQ.filter(k=>String(d[k]||'').trim()).length+S_BOX.filter(k=>d[k]===true).length,p=Math.round(f/(S_REQ.length+S_BOX.length)*100);
+  $('#stMeter').style.width=p+'%';$('#stPct').textContent=p+'%';
+  const ok1=S_REQ.every(k=>String(d[k]||'').trim());
+  const ok=rateBox('st',[['مسار أساسي وبديل',!!(hasVal(d.pathMain)&&hasVal(d.pathAlt))],['مساند وبديل',!!(hasVal(d.helper1)&&hasVal(d.helper2))],
+    ['طريقة التنبيه والنقل',!!(hasVal(d.alert)&&hasVal(d.method))],['تجربة موثقة وموافقة',d.trial===true&&d.consent===true]])&&ok1;
+  $('#stCrit').innerHTML=`<div class="crit"><span class="dot ${ok1?'ok':'no'}">${ok1?'✓':'✕'}</span>يُحدَّد موقع الطالب وترتيب إخلائه بخطته الفردية وفق احتياجه والمخاطر والمسارات</div>`;
+  const v=$('#stVerdict');v.className='verdict '+(ok1?'s-ok':'s-no');
+  v.textContent=ok1?'المعيار مستوفٍ':'غير مستوفٍ — أكمل عناصر الخطة';
+  const st=$('#stStatus');st.className='status '+(ok?'s-ok':'s-no');st.textContent=ok?'مستوفية':'غير مكتملة';
+  $('#stChips').innerHTML=students.map((x,i)=>`<span class="chip ${i===cur?'on':''}" data-i="${i}">${esc(x.name||('طالب '+(i+1)))}<span class="d ${sOk(x)?'ok':''}"></span></span>`).join('');
+  $$('#stChips .chip').forEach(c=>c.onclick=()=>{cur=+c.dataset.i;sApply(students[cur]);sRender()});
+  $('#indivHint').textContent='عدد الخطط الفردية المعدّة: '+students.filter(x=>x.name).length;
+  try{localStorage.setItem(SKEY,JSON.stringify({students,cur}))}catch(e){}
+  hubRender();
+}
+$('#v-student').addEventListener('input',sRender);$('#v-student').addEventListener('change',sRender);
+$('#stNew').onclick=()=>{students.push({});cur=students.length-1;sApply({});sRender();toast('أُضيف طالب جديد')};
+$('#stDel').onclick=()=>confirmBox('سيُحذف هذا الطالب وخطته. متابعة؟',()=>{students.splice(cur,1);
+  if(!students.length)students=[{}];cur=Math.max(0,cur-1);sApply(students[cur]);sRender();toast('تم الحذف')});
+const ST_CASE={name:'',
+  pathMain:'باب الفصل 2/ب ثم الممر إلى أقرب مخرج أرضي خالٍ من الدرج',pathAlt:'المخرج الآخر أو منطقة انتظار آمنة',
+  helper1:'معلم الفصل',helperTel:'',helper2:'معلم الفصل المجاور',
+  need:'احتياج حركي (كرسي متحرك)',med:'يُستوفى الاحتياج الطبي والدواء إن وُجدا مع الأسرة',
+  alert:'الجرس مع تنبيه مباشر من المساند',method:'دفع الكرسي عبر المسار الأرضي دون درج',
+  spot:'موقع معلوم في الساحة الجنوبية',comm:'بجهاز الاتصال المحدد'};
+$('#stCase').onclick=()=>confirmBox('سيُستبدل ما في خطة هذا الطالب بنموذج الإجابة. متابعة؟',()=>{sApply(Object.assign({},ST_CASE,{name:sCollect().name}));sRender();toast('حُمّل نموذج الإجابة')});
+$('#stCopy').onclick=async()=>{const d=sCollect();const L=[
+  'نموذج (7) — الخطة الفردية للطالب (بيانات سرية لا يطّلع عليها إلا المكلّفون)',
+  `الطالب: ${d.name}`,
+  `المسار والمساندة: المسار الأساسي: ${d.pathMain}؛ والبديل: ${d.pathAlt}؛ المساند الأول: ${d.helper1} ووسيلة اتصاله: ${d.helperTel}؛ والبديل: ${d.helper2}`,
+  `الاحتياج والاستجابة: ${d.need}${d.med?'؛ '+d.med:''}`,
+  `التنبيه والإخلاء: ${d.alert}؛ ${d.method}؛ ${d.spot}؛ والتواصل: ${d.comm}`,
+  `التجربة والموافقة: ${d.trial?'تجربة موثقة':'لم توثق التجربة'}${d.trialDate?' ('+d.trialDate+')':''}؛ ${d.consent?'تمت الموافقة':'لم تتم الموافقة'}`,
+  $('#stRate').textContent,
+  `الحكم: ${$('#stVerdict').textContent}`].join('\n');
+  try{await navigator.clipboard.writeText(L);toast('نُسخت خطة الطالب')}catch(e){toast('تعذّر النسخ')}};
+$('#stPrint').onclick=doPrint;
+
+/* ===== Drill management ===== */
+const DKEY='evac_drill_v1';
+const DR_ITEMS=['اعتمد السيناريو والهدف والموعد','كلّف المراقبين بما يرصدونه','افحص المسارات (النموذج 6)','فعّل الخطط الفردية (النموذج 7)',
+  'أطلق الإنذار وابدأ القياس','راقب المخارج وأداء الفرق','سجّل الأزمنة الثلاثة','احصر وارفع النتيجة (النموذج 17)',
+  'حرّر محضر التجربة فوراً','اعقد جلسة ما بعد التمرين','سجّل الملاحظات (النموذج 14)','قيّم التمرين (النموذج 15)'];
+const PH=['قبل التمرين','أثناء التمرين','بعد التمرين'];
+function addAar(r=['','','','','','']){
+  const tr=document.createElement('tr');
+  tr.innerHTML=r.map(v=>`<td><input class="a-c" value="${esc(v)}"></td>`).join('')+'<td><button class="del" title="حذف">×</button></td>';
+  tr.querySelector('.del').onclick=()=>{tr.remove();dRender()};
+  $('#aarTbl tbody').appendChild(tr);
+}
+let reports=[{}],rpCur=0;
+const RP_REQ=['no','term','date','students','special','staff','time','pos','neg','up','principal','safety'];
+const rpRead=()=>{const r={};$$('[data-r]').forEach(el=>r[el.dataset.r]=el.value);return r};
+const rpWrite=r=>$$('[data-r]').forEach(el=>el.value=r[el.dataset.r]||'');
+const rpOk=r=>RP_REQ.every(k=>String(r[k]||'').trim())&&(r.up!=='نعم'||String(r.link||'').trim());
+function rpPrefill(){const e=collect(),r=rpRead();let ch=false;
+  [['students',e.students],['staff',e.staff],['principal',e.principal],['safety',e.safety]].forEach(([k,v])=>{if(!r[k]&&v){$(`[data-r="${k}"]`).value=v;ch=true}});
+  if(!r.no){$('[data-r="no"]').value=rpCur+1}}
+function dCollect(){reports[rpCur]=rpRead();return{checks:$$('[data-dr]').map(c=>c.checked),
+  aar:$$('#aarTbl tbody tr').map(tr=>[...tr.querySelectorAll('.a-c')].map(i=>i.value)),reports:reports.map(r=>Object.assign({},r)),rpCur}}
+function dApply(d){$$('[data-dr]').forEach((c,i)=>c.checked=!!(d.checks||[])[i]);
+  $('#aarTbl tbody').innerHTML='';(d.aar&&d.aar.length?d.aar:[undefined]).forEach(r=>addAar(r));
+  reports=d.reports&&d.reports.length?d.reports:[{}];rpCur=Math.min(d.rpCur||0,reports.length-1);rpWrite(reports[rpCur]);rpPrefill();dRender()}
+function rpRender(){const r=reports[rpCur]||{};
+  const t=RP_REQ.length+(r.up==='نعم'?1:0),f=RP_REQ.filter(k=>String(r[k]||'').trim()).length+(r.up==='نعم'&&String(r.link||'').trim()?1:0);
+  $('#rpChk').textContent=f+'/'+t;$('#rpChk').classList.toggle('done',f===t);
+  $('#rpChips').innerHTML=reports.map((x,i)=>`<span class="chip ${i===rpCur?'on':''}" data-i="${i}">تجربة ${esc(x.no||i+1)}<span class="d ${rpOk(x)?'ok':''}"></span></span>`).join('');
+  $$('#rpChips .chip').forEach(c=>c.onclick=()=>{reports[rpCur]=rpRead();rpCur=+c.dataset.i;rpWrite(reports[rpCur]);dRender()})}
+$('#rpNew').onclick=()=>{reports[rpCur]=rpRead();reports.push({});rpCur=reports.length-1;rpWrite({});rpPrefill();dRender();toast('أُضيفت تجربة جديدة')};
+$('#rpDel').onclick=()=>confirmBox('سيُحذف تقرير هذه التجربة. متابعة؟',()=>{reports.splice(rpCur,1);if(!reports.length)reports=[{}];
+  rpCur=Math.max(0,rpCur-1);rpWrite(reports[rpCur]);dRender();toast('تم الحذف')});
+$('#toReport').onclick=e=>{e.preventDefault();$('#rpCard').scrollIntoView({behavior:'smooth',block:'start'})};
+function dRender(){
+  const d=dCollect();
+  $$('#v-drill .phase').forEach(sec=>{const i=+sec.dataset.ph,f=d.checks.slice(i*4,i*4+4).filter(Boolean).length;
+    const c=sec.querySelector('.chk');c.textContent=f+'/4';c.classList.toggle('done',f===4)});
+  const rows=d.aar.filter(r=>r.some(v=>v.trim())),closed=rows.filter(r=>r.every(v=>v.trim())).length;
+  const ac=$('#aarChk');ac.textContent=closed+'/'+rows.length;ac.classList.toggle('done',rows.length>0&&closed===rows.length);
+  const n=d.checks.filter(Boolean).length,p=Math.round(n/12*100);
+  $('#drMeter').style.width=p+'%';$('#drPct').textContent=p+'%';
+  const ph=[0,1,2].map(i=>d.checks.slice(i*4,i*4+4).every(Boolean));
+  const st=$('#drStatus');
+  st.textContent=ph[2]&&ph[1]&&ph[0]?'اكتمل التمرين':ph[1]&&ph[0]?'بعد التمرين':ph[0]?'أثناء التمرين':'قبل التمرين';
+  st.className='status '+(n===12?'s-ok':'s-no');
+  rpRender();
+  try{localStorage.setItem(DKEY,JSON.stringify(d))}catch(e){}
+  hubRender();
+}
+$('#v-drill').addEventListener('input',dRender);$('#v-drill').addEventListener('change',dRender);
+$('#addAar').onclick=()=>{addAar();dRender()};
+$('#drClear').onclick=()=>confirmBox('سيُمسح كل ما في صفحة إدارة التمرين. متابعة؟',()=>{dApply({});toast('تم المسح')});
+$('#drPrint').onclick=doPrint;
+$('#drCopy').onclick=async()=>{const d=dCollect();const L=['أدر التمرين في ثلاث مراحل'];
+  PH.forEach((h,i)=>{L.push(h+':');DR_ITEMS.slice(i*4,i*4+4).forEach((t,j)=>L.push(`  ${d.checks[i*4+j]?'☑':'☐'} ${j+1}. ${t}`))});
+  const rows=d.aar.filter(r=>r.some(v=>v.trim()));
+  reports.filter(r=>Object.values(r).some(v=>String(v).trim())).forEach(r=>{L.push(`تقرير تجربة الإخلاء الفرضية رقم (${r.no||''}) الفصل الدراسي (${r.term||''})`,
+    `  تاريخ التنفيذ: ${r.date||''} | عدد الطلاب: ${r.students||''} | عدد طلاب التربية الخاصة: ${r.special||''} | عدد الهيئة التعليمية والإدارية: ${r.staff||''}`,
+    `  الزمن المستغرق في عملية الإخلاء: ${r.time||''}`,`  الإيجابيات: ${r.pos||''}`,`  السلبيات: ${r.neg||''}`,
+    `  تم الرفع بتنفيذ خطة الإخلاء: ${r.up||''}${r.link?' — الرابط: '+r.link:''}`,`  مدير المدرسة: ${r.principal||''} | مسؤول الأمن والسلامة: ${r.safety||''}`)});
+  if(rows.length){L.push('أسئلة جلسة ما بعد التمرين:');rows.forEach((r,i)=>L.push(`  ${i+1}) المتوقع: ${r[0]} | ماذا حدث: ${r[1]} | لماذا: ${r[2]} | ما الذي سيتغير: ${r[3]} | من يغلق الملاحظة: ${r[4]} | دليل الإغلاق: ${r[5]}`))}
+  try{await navigator.clipboard.writeText(L.join('\n'));toast('تم النسخ')}catch(e){toast('تعذّر النسخ')}};
+
+/* ===== Sequence ===== */
+const QKEY='evac_seq_v1';
+const SEQ=[['شكّل الفريق','نموذج 11','#team'],['صنّف ونفّذ جولة المخاطر','نموذج 4',''],['أعدّ الخطة والكروكي','نماذج 2، 3','#evac'],
+  ['خطط فردية لذوي الاحتياج','نموذج 7','#student'],['قائمة الاتصال ومسار البلاغ','نموذج 8',''],['جدول التمارين والتحديث الشهري','نموذجا 12/13',''],['قِس الجاهزية واعتمد','نموذج 1','']];
+let seqState=[];
+function qRender(){
+  $('#seqList').innerHTML=SEQ.map((x,i)=>`<div class="step ${seqState[i]?'done':''}" data-i="${i}"><div class="num">${i+1}</div><b>${x[0]}</b>${x[2]?`<a class="ref" href="${x[2]}">${x[1]}</a>`:`<span class="ref">${x[1]}</span>`}</div>`).join('');
+  $$('#seqList .step').forEach(el=>el.onclick=e=>{if(e.target.closest('a'))return;const i=+el.dataset.i;seqState[i]=!seqState[i];qRender()});
+  const n=seqState.filter(Boolean).length,p=Math.round(n/7*100);
+  $('#sqMeter').style.width=p+'%';$('#sqPct').textContent=p+'%';
+  const next=SEQ.findIndex((_,i)=>!seqState[i]);
+  const st=$('#sqStatus');st.className='status '+(n===7?'s-ok':'s-no');
+  st.textContent=n===7?'اكتملت الخطوات السبع':'الخطوة التالية: '+(next+1)+' — '+SEQ[next][0];
+  try{localStorage.setItem(QKEY,JSON.stringify(seqState))}catch(e){}
+  hubRender();
+}
+const qCollect=()=>({steps:SEQ.map((_,i)=>!!seqState[i])});
+const qApply=d=>{seqState=(d&&d.steps)||[];qRender()};
+$('#sqClear').onclick=()=>confirmBox('سيُمسح ما أنجزته في التسلسل. متابعة؟',()=>{qApply({});toast('تم المسح')});
+$('#sqPrint').onclick=doPrint;
+$('#sqCopy').onclick=async()=>{const L=['من أين تبدأ مدرستك؟ سبع خطوات بالترتيب',...SEQ.map((x,i)=>`${seqState[i]?'☑':'☐'} ${i+1}. ${x[0]} (${x[1]})`),
+  'التنفيذ معجّل ومستمر، والخطة الزمنية التفصيلية تعدّها إدارة التعليم؛ والتسلسل المعروض مقترح للبدء.'];
+  try{await navigator.clipboard.writeText(L.join('\n'));toast('تم النسخ')}catch(e){toast('تعذّر النسخ')}};
+
+/* ===== Team matrix 11 ===== */
+const TKEY='evac_team_v1';
+const TM_DEF=['قائد الإخلاء','الحصر','التواصل الخارجي'];
+function tmAddRow(r=['','','','','','']){const tr=document.createElement('tr');
+  tr.innerHTML=r.map(v=>`<td><input class="t-c" value="${esc(v)}"></td>`).join('')+'<td><button class="del" title="حذف">×</button></td>';
+  tr.querySelector('.del').onclick=()=>{tr.remove();tmRender()};$('#tmTbl tbody').appendChild(tr)}
+function tmCollect(){return{rows:$$('#tmTbl tbody tr').map(tr=>[...tr.querySelectorAll('.t-c')].map(i=>i.value)),noGap:$('#tmNoGap').checked}}
+function tmApply(d){$('#tmTbl tbody').innerHTML='';(d.rows&&d.rows.length?d.rows:TM_DEF.map(x=>[x,'','','','',''])).forEach(r=>tmAddRow(r));$('#tmNoGap').checked=!!d.noGap;tmRender()}
+function tmRender(){
+  const d=tmCollect(),cells=d.rows.length*5,filled=d.rows.reduce((a,r)=>a+r.slice(1).filter(v=>v.trim()).length,0);
+  const full=d.rows.length>0&&filled===cells&&d.rows.every(r=>r[0].trim());
+  $('#tmChk').textContent=filled+'/'+cells;$('#tmChk').classList.toggle('done',full);
+  $('#tmChk2').textContent=(d.noGap?1:0)+'/1';$('#tmChk2').classList.toggle('done',d.noGap);
+  const names={};d.rows.forEach(r=>[r[1],r[2]].forEach(n=>{n=n.trim();if(n)names[n]=(names[n]||0)+1}));
+  const dups=Object.keys(names).filter(n=>names[n]>1);
+  $('#tmDup').textContent=dups.length?'⚠ أسماء مكررة في أكثر من تكليف: '+dups.join('، '):'';
+  const p=Math.round((filled+(d.noGap?1:0))/(cells+1)*100);$('#tmMeter').style.width=p+'%';$('#tmPct').textContent=p+'%';
+  const ok=rateBox('tm',[['لكل دور مسؤول أساسي وبديل وموقع واتصال ومهمة عند التفعيل',full],
+    ['لا ازدواج تكليف',d.rows.length>0&&Object.keys(names).length>0&&!dups.length],['ولا صف بلا إشراف',d.noGap]]);
+  const st=$('#tmStatus');st.className='status '+(ok?'s-ok':'s-no');st.textContent=ok?'مستوفية':'غير مكتملة';
+  try{localStorage.setItem(TKEY,JSON.stringify(d))}catch(e){}
+  hubRender();
+}
+$('#v-team').addEventListener('input',tmRender);$('#v-team').addEventListener('change',tmRender);
+$('#tmAdd').onclick=()=>{tmAddRow();tmRender()};
+$('#tmClear').onclick=()=>confirmBox('سيُمسح كل ما في مصفوفة الفريق. متابعة؟',()=>{tmApply({});toast('تم المسح')});
+$('#tmPrint').onclick=doPrint;
+$('#tmCopy').onclick=async()=>{const d=tmCollect();const L=['مصفوفة الفريق — نموذج (11)',
+  ...d.rows.map((r,i)=>`${i+1}. ${r[0]}: الأساسي ${r[1]} | البديل ${r[2]} | الموقع ${r[3]} | الاتصال ${r[4]} | المهمة عند التفعيل: ${r[5]}`),
+  'لا صف بلا إشراف: '+(d.noGap?'تم التحقق':'لم يُتحقق'),$('#tmRate').textContent];
+  try{await navigator.clipboard.writeText(L.join('\n'));toast('تم النسخ')}catch(e){toast('تعذّر النسخ')}};
+
+/* ===== Commitment card ===== */
+const CKEY='evac_commit_v1';
+function cmBuild(){$('#cmTbl tbody').innerHTML=[0,1,2].map(i=>`<tr><td><b>${i+1}</b></td><td><input class="c-a"></td><td><input class="c-o"></td><td><input type="date" class="c-d"></td><td><input class="c-e"></td><td style="text-align:center"><input type="checkbox" class="c-x" style="width:20px;height:20px"></td></tr>`).join('')}
+function cmCollect(){return{school:$('#cmSchool').value,start:$('#cmStart').value,
+  acts:$$('#cmTbl tbody tr').map(tr=>({a:tr.querySelector('.c-a').value,o:tr.querySelector('.c-o').value,d:tr.querySelector('.c-d').value,e:tr.querySelector('.c-e').value,x:tr.querySelector('.c-x').checked}))}}
+function cmApply(d){$('#cmSchool').value=d.school||'';$('#cmStart').value=d.start||'';
+  $$('#cmTbl tbody tr').forEach((tr,i)=>{const a=(d.acts||[])[i]||{};tr.querySelector('.c-a').value=a.a||'';tr.querySelector('.c-o').value=a.o||'';tr.querySelector('.c-d').value=a.d||'';tr.querySelector('.c-e').value=a.e||'';tr.querySelector('.c-x').checked=!!a.x});cmRender()}
+function cmRender(){
+  const d=cmCollect();let lim=null;
+  if(d.start){const t=new Date(d.start+'T00:00');t.setDate(t.getDate()+42);lim=t.toISOString().slice(0,10)}
+  $('#cmLimit').textContent=lim?'نهاية الأسابيع الستة: '+lim:'';
+  const inWin=a=>!!(a.d&&d.start&&a.d>=d.start&&a.d<=lim);
+  const rowOk=a=>!!(a.a.trim()&&a.o.trim()&&a.d&&a.e.trim());
+  $$('#cmTbl tbody tr').forEach((tr,i)=>{const a=d.acts[i];tr.querySelector('.c-d').style.borderColor=(a.d&&lim&&!inWin(a))?'var(--red)':''});
+  const f1=[d.school,d.start].filter(v=>v&&v.trim()).length;$('#cmChk1').textContent=f1+'/2';$('#cmChk1').classList.toggle('done',f1===2);
+  const f2=d.acts.reduce((n,a)=>n+[a.a,a.o,a.d,a.e].filter(v=>v&&v.trim()).length,0);$('#cmChk2').textContent=f2+'/12';$('#cmChk2').classList.toggle('done',f2===12);
+  const p=Math.round((f1+f2)/14*100);$('#cmMeter').style.width=p+'%';$('#cmPct').textContent=p+'%';
+  const ok=d.acts.every(rowOk)&&d.acts.every(inWin);
+  $('#cmCrit').innerHTML=`<div class="crit"><span class="dot ${ok?'ok':'no'}">${ok?'✓':'✕'}</span>ثلاثة إجراءات محددة، لكل منها مسؤول وموعد خلال ستة أسابيع ودليل قابل للتحقق</div>`;
+  const v=$('#cmVerdict');v.className='verdict '+(ok?'s-ok':'s-no');v.textContent=ok?'البطاقة مستوفية':'غير مستوفية — أكمل الإجراءات الثلاثة ضمن الأسابيع الستة';
+  const done=d.acts.filter(a=>a.x).length,st=$('#cmStatus');st.className='status '+(done===3?'s-ok':'s-no');st.textContent='أُنجز '+done+' من 3';
+  try{localStorage.setItem(CKEY,JSON.stringify(d))}catch(e){}
+  hubRender();
+}
+cmBuild();
+$('#v-commit').addEventListener('input',cmRender);$('#v-commit').addEventListener('change',cmRender);
+$('#cmClear').onclick=()=>confirmBox('سيُمسح كل ما في بطاقة الالتزام. متابعة؟',()=>{cmApply({});toast('تم المسح')});
+$('#cmPrint').onclick=doPrint;
+$('#cmCopy').onclick=async()=>{const d=cmCollect();const L=['نشاط 6: مدرسة '+d.school,...d.acts.map((a,i)=>`${i+1}. ${a.a} | ${a.o} | ${a.d} | ${a.e}`)];
+  try{await navigator.clipboard.writeText(L.join('\n'));toast('نُسخت بصيغة الرد')}catch(e){toast('تعذّر النسخ')}};
+
+/* ===== Jazan safety registry ===== */
+const GKEY='evac_reg_v1';
+const R_EVAC=[
+ ['رئيس/ة الفريق','استقبال جهات الطوارئ',3,'استقبال جهات الطوارئ وتوجيههم الى مكان الحادث وإعطائهم معلومات اولية وإشعارهم عند وجود مفقودين/ات.',3],['نائب/ة الفريق'],['عضو/ة'],
+ ['عضو/ة','التنظيم والتعداد',2,'أخذ تعداد الطالب/ات من معلمي/ات كل فصل والتأكد من خروج الجميع، وتبليغ فرق الطوارئ في حال فقدان أحد مع تحديد عدد المفقودين/ات.',2],['عضو/ة'],
+ ['عضو/ة','المجموعة الخاصة',1,'مباشرة عملية الاخلاء لذوي الاحتياجات الخاصة والحالات الصحية واخلائهم عبر أقرب مخرج طوارئ.',1],
+ ['عضو/ة','الاخلاء',10,'المجموعة 1:\n- التوجه السريع الى موقع الحادث\n- ابعاد الطالب/ات عن موقع الخطر\n- توجيههم الى أقرب المخارج بعكس مكان الخطر.\n- إطفاء لوحة الكهرباء في كل دور',4],['عضو/ة'],['عضو/ة'],['عضو/ة'],
+ ['عضو/ة',null,0,'المجموعة 2:\n- التواجد أعلى وأسفل سلالم الدرج\n- تنظيم خروج الطالب/ات ومنع التدافع وعكس اتجاه مسار الاخلاء',3],['عضو/ة'],['عضو/ة'],
+ ['عضو/ة',null,0,'المجموعة 3:\n- تفقد كافة أبواب الطوارئ وفتحها بشكل كامل قبل تدافع الطالب/ات',3],['عضو/ة'],['عضو/ة']];
+const grp=(n,task)=>Array.from({length:n},(_,i)=>i===0?['رئيس/ة الفريق',null,0,task,n]:[i===1?'نائب/ة الفريق':'عضو/ة']);
+const R_RESCUE=grp(7,'التوجه في حال سماع الانذار الى موقع الحادث والاسهام في مساعدة وإخراج المحتجزين/ات ونقل المصابين/ات وإبعادهم عن منطقة الخطر. وتفقد المبنى بالكامل للتأكد من خلوه تماماً من أي شخص.');
+const R_AID=grp(7,'التوجه في حال سماع الإنذار الى موقع الحادث واجراء الاسعافات الاولية ومتابعة نقل المصابين/ات في حالة الضرورة الى أقرب مركز صحي او مستشفى مع تسجيل الأسماء والأعداد ووجهة نقلهم وإبلاغ مدير/ة المدرسة لإبلاغ ولي الأمر بذلك.');
+const R_FIRE=grp(5,'الإسهام في احتواء الحادث إذا كان حادث حريق بسيط ويمكن السيطرة عليه واستخدام الوسائل المتاحة لإخماده دون تعريض أنفسهم للخطر.');
+const INV=[['تجهيزات الإطفاء',13,'طفايات الحريق الالية','مكتب مسؤول الامن والسلامة - المكاتب الإدارية - المختبرات والمعامل – غرف مصادر التعلم'],[null,0,'طفايات حريق','موزعة في جميع أدوار المدرسة'],
+ [null,0,'صناديق إطفاء الحريق','الفناء الخارجي - الدور الأرضي - الدور الأول - الدور الثاني'],[null,0,'جرس الانذار','ممر الادارة'],[null,0,'لوحة التحكم','ممر الادارة'],
+ [null,0,'كواشف الدخان','الإدارة - مصادر التعلم - التدبير المنزلي المختبر - الورشة – معمل الحاسب – الصالة الرياضية'],[null,0,'كواشف الحرارة',''],[null,0,'كواشف الغاز',''],
+ [null,0,'جرادل الرمل','معمل الحاسب – معمل العلوم – غرفة تحضير – المقصف – غرفة الأمن والسلامة - غرفة الأسرية'],[null,0,'بطانيات الحريق','معمل العلوم – غرفة التحضير – الأرشيف – غرفة الأسرية – المقصف'],
+ [null,0,'خزان المياه','الفناء الخارجي'],[null,0,'مضخة الحريق','الفناء الخارجي'],[null,0,'لوحات إرشادية','موزعة في المبنى المدرسي'],
+ ['تجهيزات الاسعافات الأولية',1,'حقائب الإسعافات الأولية','غرفة الأمن والسلامة – معمل العلوم – غرفة الموجه/ة الطلابي/ة – غرفة المرشد/ة الصحي/ة'],
+ ['مخرج الطوارئ وخطط الإخلاء',4,'مخارج الطوارئ','الدور الأرضي'],[null,0,'نقاط التجمع','الفناء الخارجي – الساحة الداخلية'],[null,0,'خطط الاخلاء','ثلاث خطط في كل فصل دراسي'],[null,0,'لوحات السلامة','لوحة مخطط الطوارئ والاخلاء لكل دور – لوحة تعليمات الإخلاء في ممرات المدرسة']];
+const F=(k,l,t='',o=null,x={})=>Object.assign({k,l,t,o},x);
+const REG=[
+ {id:'school',t:'البيانات الأولية للمدرسة',b:[{f:[F('schName','اسم المدرسة'),F('schStage','المرحلة'),F('schNo','الرقم الوزاري'),F('schLoc','موقع المدرسة'),F('schStreet','الحي – الشارع'),F('schGeo','احداثيات المدرسة'),F('schBldg','نوع المبنى'),
+   F('schShift','فترة الدوام','sel',['صباحي','مسائي']),F('schTel','رقم الهاتف'),F('schMail','البريد الإلكتروني للمدرسة'),F('schCls','عدد الفصول','num'),F('schStu','عدد الطالبات/الطلاب','num'),
+   F('schTch','عدد الموظفين — الهيئة التعليمية','num'),F('schAdm','عدد الموظفين — الهيئة الإدارية','num'),F('schProg','يوجد برامج وزارية ملحقة بالمدرسة','sel',['نعم','لا'])]},
+   {h:'البرامج الملحقة (إن وجدت)',grid:{k:'prog',opt:1,cols:['','1','2','3'],rows:['اسم البرنامج','رقمه الوزاري','عدد فصوله','عدد طلابه']}},
+   {h:'',grid:{k:'con',cols:['','الاسم','الهاتف'],rows:['مدير/ة المدرسة','منسق/ة السلامة','حارس أمن المدرسة','حارسة الأمن (إن وجدت)'],optRows:[3]}}]},
+ {id:'cv',t:'السيرة الذاتية لمنسق/ة الأمن والسلامة',b:[{f:[F('cvName','اسم المنسق/ة'),F('cvTel','الهاتف'),F('cvId','رقم السجل المدني'),F('cvMail','البريد الالكتروني الوزاري (…@moe.gov.sa)','',null,{ltr:1}),F('cvTrain','البرامج التدريبية التي حصل/ت عليها في مجال الأمن والسلامة','area')]}]},
+ {id:'aware',t:'خطة البرامج التوعوية لمنسق/ة الأمن والسلامة',b:[{note:'الهدف العام: التوعية بأهمية الأمن والسلامة المدرسية وغرس مبادئ الوقاية لدى المعلمين/ات والطلاب/ات داخل المدرسة وعلى المجتمع الخارجي من خلال الإذاعة المدرسية والأنشطة اللاصفية وإقامة المعارض.'},
+   {grid:{k:'aw',num:1,cols:['م','النشاط','الهدف منه','مدة التنفيذ','الفئة المستهدفة','الشاهد'],rows:['1','2','3','4','5','6']}}]},
+ {id:'committee',t:'لجنة الإخلاء حسب دليل الإخلاء',b:[{h:'1: أعضاء مجموعة الاخلاء',com:{k:'g1',rows:R_EVAC,team:1}},{h:'2: أعضاء مجموعة الانقاذ',com:{k:'g2',rows:R_RESCUE}},{h:'3: أعضاء مجموعة الاسعاف',com:{k:'g3',rows:R_AID}},{h:'4: أعضاء مجموعة الإطفاء',com:{k:'g4',rows:R_FIRE}}]},
+ {id:'inv',t:'حصر أدوات الأمن والسلامة في المدرسة',b:[{inv:1}]},
+ {id:'prog',t:'تقرير تنفيذ برنامج',b:[{h:'1/ بيانات أساسية عن البرنامج',f:[F('prName','اسم البرنامج'),F('prDay','اليوم'),F('prDate','التاريخ','date'),F('prBy','الجهة المنفذة'),F('prTarget','الفئة المستهدفة'),
+   F('prMethod','أسلوب التدريب','chk',['محاضرة','ورشة عمل','إذاعة مدرسية','عروض']),F('prHours','مدة البرنامج (عدد الساعات)','num'),F('prAtt','عدد الحضور','num')]},
+   {f:[F('prGoals','2/ أهداف البرنامج','area'),F('prAxes','3/ محاور البرنامج','area'),F('prRes','4/ النتائج','area'),F('prRec','5/ التوصيات','area'),F('prAuthor','معد/ة التقرير','',null,{sign:1}),F('prPrin','مدير/ة المدرسة','',null,{sign:1})]}]},
+ {id:'drillrep',t:'تقرير تجربة الإخلاء الفرضية',link:1}];
+let rgCur='school';
+const at=(k,l,opt)=>`data-g="${k}" data-l="${esc(l)}"${opt?' data-opt="1"':''}`;
+function fieldHTML(x){const a=at(x.k,x.l);
+  let inp=x.t==='sel'?`<select ${a}><option value="">— اختر —</option>${x.o.map(o=>`<option>${o}</option>`).join('')}</select>`
+   :x.t==='area'?`<textarea ${a}></textarea>`:x.t==='chk'?`<div class="checks gchk" ${a}>${x.o.map(o=>`<label><input type="checkbox" value="${o}">${o}</label>`).join('')}</div>`
+   :`<input ${a} type="${x.t==='num'?'number':x.t==='date'?'date':'text'}"${x.ltr?' dir="ltr"':''}>`;
+  return `<div class="${x.t==='area'||x.t==='chk'?'full':''}"><label>${x.l}</label>${inp}${x.sign?'<div class="sign"></div><div class="hint">التوقيع</div>':''}</div>`}
+function blockHTML(b){let h=b.h?`<h3 class="rg-h">${b.h}</h3>`:'';
+  if(b.note)h+=`<div class="rg-note">${b.note}</div>`;
+  if(b.f)h+=`<div class="grid">${b.f.map(fieldHTML).join('')}</div>`;
+  if(b.grid){const g=b.grid;h+=`<div class="rg-tw"><table class="rg-t"><thead><tr>${g.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${g.rows.map((r,i)=>`<tr><th class="rh">${r}</th>${g.cols.slice(1).filter((_,j)=>!(g.num&&j<0)).map((c,j)=>g.num&&false?'':`<td><input ${at(`${g.k}_${i}_${j}`,(r+' — '+(c||'')).trim(),g.opt||(g.optRows||[]).includes(i))}></td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
+  if(b.com){const c=b.com;h+=`<div class="rg-tw"><table class="rg-t com"><thead><tr><th>م</th><th>الاسم</th><th>العمل المكلف/ة به</th>${c.team?'<th>الفرقة</th>':''}<th>التوقيع</th><th>المهمة</th></tr></thead><tbody>${c.rows.map((r,i)=>`<tr><th class="rh">${i+1}</th><td><input ${at(`${c.k}_${i}`,`${b.h} — ${i+1}. ${r[0]}`)}></td><td class="fx">${r[0]}</td>${c.team&&r[2]?`<td class="fx tm" rowspan="${r[2]}">${r[1]}</td>`:''}<td class="sg"></td>${r[4]?`<td class="fx tk" rowspan="${r[4]}">${esc(r[3]).replace(/\n/g,'<br>')}</td>`:''}</tr>`).join('')}</tbody></table></div>`}
+  if(b.inv){h+=`<div class="rg-tw"><table class="rg-t inv"><thead><tr><th>البنود</th><th>التفاصيل</th><th style="width:90px">العدد</th><th>مكان التواجد</th></tr></thead><tbody>${INV.map((r,i)=>`<tr>${r[1]?`<th class="cat" rowspan="${r[1]}">${r[0]}</th>`:''}<td class="fx">${r[2]}</td><td><input type="number" min="0" ${at('inv_n_'+i,r[2]+' — العدد')}></td><td><input ${at('inv_l_'+i,r[2]+' — مكان التواجد',1)} data-def="${esc(r[3])}"></td></tr>`).join('')}</tbody></table></div>`}
+  return h}
+function rgBuild(){
+  $('#rgSegs').innerHTML=REG.map((r,i)=>`<button class="seg" data-f="${r.id}"><span class="n">${i+1}</span>${r.t}<span class="sb" id="sb_${r.id}"></span></button>`).join('');
+  $('#rgPanels').innerHTML=REG.map(r=>`<section class="card rg-p" data-f="${r.id}"><h2>${r.t}</h2><div class="body">${r.link?`<p>هذا النموذج مبني داخل «إدارة التمرين» ومرتبط ببند «حرّر محضر التجربة فوراً».</p><button class="primary" id="rgToRep">فتح تقرير تجربة الإخلاء الفرضية</button>`:r.b.map(blockHTML).join('')}</div></section>`).join('');
+  $$('#rgSegs .seg').forEach(b=>b.onclick=()=>{rgCur=b.dataset.f;rgShow()});
+  $('#rgToRep').onclick=()=>{location.hash='drill';setTimeout(()=>{$('#rpCard').scrollIntoView({behavior:'smooth',block:'start'})},450)};
+}
+function rgShow(){$$('#rgSegs .seg').forEach(b=>b.classList.toggle('on',b.dataset.f===rgCur));$$('.rg-p').forEach(p=>p.classList.toggle('on',p.dataset.f===rgCur));rgRender()}
+const gVal=el=>el.classList.contains('gchk')?[...el.querySelectorAll('input:checked')].map(i=>i.value):el.value;
+const gFilled=el=>{const v=gVal(el);return Array.isArray(v)?v.length>0:String(v).trim()!==''};
+function rgCollect(){const d={};$$('[data-g]').forEach(el=>d[el.dataset.g]=gVal(el));return d}
+function rgApply(d){$$('[data-g]').forEach(el=>{let v=d[el.dataset.g];
+  if(el.classList.contains('gchk'))el.querySelectorAll('input').forEach(i=>i.checked=(v||[]).includes(i.value));
+  else{if(v===undefined&&el.dataset.def!==undefined)v=el.dataset.def;el.value=v||''}});
+  const e=collect(),set=(k,v)=>{const el=$(`[data-g="${k}"]`);if(el&&!el.value&&v)el.value=v};
+  set('schName',e.school);set('schStu',e.students);set('con_0_0',e.principal);
+  rgRender()}
+function panelStat(id){const req=$$(`.rg-p[data-f="${id}"] [data-g]:not([data-opt])`);return[req.filter(gFilled).length,req.length]}
+function rgRender(){
+  let T=0,Fd=0;REG.filter(r=>!r.link).forEach(r=>{const[f,t]=panelStat(r.id);T+=t;Fd+=f;const sb=$('#sb_'+r.id);sb.textContent=f+'/'+t;sb.classList.toggle('done',f===t)});
+  $('#rgOverall')&&($('#rgOverall').textContent=Math.round(Fd/T*100)+'%');
+  const cur=REG.find(r=>r.id===rgCur);
+  if(cur.link){$('#rgPTitle').textContent='تقرير تجربة الإخلاء';$('#rgMeter').style.width='0';$('#rgPct').textContent='—';$('#rgStatus').textContent='يُعبّأ في إدارة التمرين';$('#rgStatus').className='status s-mid'}
+  else{const[f,t]=panelStat(rgCur),p=Math.round(f/t*100);$('#rgPTitle').textContent='اكتمال: '+cur.t;$('#rgMeter').style.width=p+'%';$('#rgPct').textContent=p+'%';
+    const st=$('#rgStatus');st.className='status '+(f===t?'s-ok':'s-no');st.textContent=f===t?'مكتمل':'غير مكتمل'}
+  rgOverallPct=T?Math.round(Fd/T*100):0;
+  try{localStorage.setItem(GKEY,JSON.stringify(Object.assign(rgCollect(),{_cur:rgCur})))}catch(e){}
+  hubRender();
+}
+let rgOverallPct=0;
+rgBuild();
+$('#v-reg').addEventListener('input',rgRender);$('#v-reg').addEventListener('change',rgRender);
+$('#rgPrint').onclick=doPrint;
+$('#rgClear').onclick=()=>{const cur=REG.find(r=>r.id===rgCur);if(cur.link)return;confirmBox('سيُمسح ما في نموذج «'+cur.t+'». متابعة؟',()=>{
+  $$(`.rg-p[data-f="${rgCur}"] [data-g]`).forEach(el=>{if(el.classList.contains('gchk'))el.querySelectorAll('input').forEach(i=>i.checked=false);else el.value=el.dataset.def||''});rgRender();toast('تم المسح')})};
+$('#rgCopy').onclick=async()=>{const cur=REG.find(r=>r.id===rgCur);if(cur.link)return;
+  const L=[cur.t,...$$(`.rg-p[data-f="${rgCur}"] [data-g]`).filter(gFilled).map(el=>{const v=gVal(el);return el.dataset.l+': '+(Array.isArray(v)?v.join('، '):v)})];
+  try{await navigator.clipboard.writeText(L.join('\n'));toast('تم النسخ')}catch(e){toast('تعذّر النسخ')}};
+
+/* ===== Save history ===== */
+const hLoad=()=>{try{return JSON.parse(localStorage.getItem(HKEY)||'[]')}catch(e){return[]}};
+function hStore(a){try{localStorage.setItem(HKEY,JSON.stringify(a));return true}
+  catch(e){toast('مساحة الحفظ ممتلئة — احذف نسخاً قديمة من السجل');return false}}
+const fmtT=t=>{try{return new Date(t).toLocaleString('ar-SA-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}catch(e){return new Date(t).toLocaleString()}};
+function snap(type){
+  let data,label;
+  if(type==='evac'){data=Object.assign(collect(),{sketch:hasSketch()?$('#sketchImg').src:''});label=data.school||'خطة بدون اسم مدرسة'}
+  else if(type==='team'){data=tmCollect();const sc=collect().school;label='مصفوفة الفريق'+(sc?' — '+sc:'')}
+  else if(type==='commit'){data=cmCollect();label='بطاقة الالتزام'+(data.school?' — '+data.school:'')}
+  else if(type==='reg'){data=Object.assign(rgCollect(),{_cur:rgCur});label='سجل الأمن والسلامة'+(data.schName?' — '+data.schName:'')}
+  else if(type==='seq'){data=qCollect();const sc=collect().school;label='تسلسل التنفيذ'+(sc?' — '+sc:'')}
+  else if(type==='drill'){data=dCollect();const sc=collect().school;label='إدارة التمرين'+(sc?' — '+sc:'')}
+  else{data=sCollect();label=data.name||'طالب بدون اسم'}
+  const a=hLoad();a.unshift({id:Date.now(),type,label,time:Date.now(),data});
+  if(hStore(a))toast('تم الحفظ في السجل');
+}
+function openHist(type){
+  $('#hTitle').textContent={evac:'سجل حفظ خطة الإخلاء (2-1)',student:'سجل حفظ الخطط الفردية (7)',drill:'سجل حفظ إدارة التمرين',seq:'سجل حفظ تسلسل التنفيذ',team:'سجل حفظ مصفوفة الفريق (11)',commit:'سجل حفظ بطاقة الالتزام',reg:'سجل حفظ سجل الأمن والسلامة'}[type];
+  const list=hLoad().filter(x=>x.type===type);
+  $('#hList').innerHTML=list.length?list.map(x=>`<div class="hrow"><div><b>${esc(x.label)}</b><small>${fmtT(x.time)}</small></div>
+    <div class="acts"><button class="primary" data-r="${x.id}">استرجاع</button><button data-p="${x.id}">طباعة</button><button class="ghost" data-x="${x.id}" style="color:var(--red)">حذف</button></div></div>`).join('')
+    :'<p class="hint">لا توجد نسخ محفوظة بعد. اضغط «حفظ» لإضافة نسخة.</p>';
+  const find=id=>hLoad().find(x=>x.id==id);
+  $$('#hList [data-r]').forEach(b=>b.onclick=()=>confirmBox('سيُستبدل المعروض حالياً بهذه النسخة. متابعة؟',()=>{restore(find(b.dataset.r));$('#hModal').classList.remove('open')}));
+  $$('#hList [data-p]').forEach(b=>b.onclick=()=>{restore(find(b.dataset.p));$('#hModal').classList.remove('open');setTimeout(doPrint,300)});
+  $$('#hList [data-x]').forEach(b=>b.onclick=()=>confirmBox('حذف هذه النسخة من السجل نهائياً؟',()=>{hStore(hLoad().filter(x=>x.id!=b.dataset.x));openHist(type)}));
+  $('#hModal').classList.add('open');
+}
+function restore(x){if(!x)return;
+  if(x.type==='evac')apply(x.data);
+  else if(x.type==='drill')dApply(x.data);
+  else if(x.type==='seq')qApply(x.data);
+  else if(x.type==='reg'){rgApply(x.data);rgCur=x.data._cur||'school';rgShow()}
+  else if(x.type==='team')tmApply(x.data);
+  else if(x.type==='commit')cmApply(x.data);
+  else{let i=students.findIndex(s=>s.name&&s.name===x.data.name);
+    if(i<0){const c=sCollect();if(!Object.values(c).some(hasVal))i=cur;else{students.push({});i=students.length-1}}
+    cur=i;sApply(x.data);sRender()}
+  toast('تم الاسترجاع')}
+$('#hClose').onclick=()=>$('#hModal').classList.remove('open');
+$('#evSave').onclick=()=>snap('evac');$('#stSave').onclick=()=>snap('student');
+$('#tmSave').onclick=()=>snap('team');$('#tmHist').onclick=()=>openHist('team');
+$('#cmSave').onclick=()=>snap('commit');$('#cmHist').onclick=()=>openHist('commit');
+$('#rgSave').onclick=()=>snap('reg');$('#rgHist').onclick=()=>openHist('reg');
+$('#sqSave').onclick=()=>snap('seq');$('#sqHist').onclick=()=>openHist('seq');
+$('#drSave').onclick=()=>snap('drill');$('#drHist').onclick=()=>openHist('drill');
+$('#evHist').onclick=()=>openHist('evac');$('#stHist').onclick=()=>openHist('student');
+
+/* ===== Backup ===== */
+$('#expBtn').onclick=()=>{
+  const all={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('evac_'))all[k]=localStorage.getItem(k)}
+  const blob=new Blob([JSON.stringify({app:'evac-forms',v:1,exported:Date.now(),all})],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='نسخة-خطط-الإخلاء-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('تم تصدير النسخة');
+};
+$('#impIn').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const j=JSON.parse(r.result);if(j.app!=='evac-forms'||!j.all)throw 0;
+    confirmBox('سيُستبدل كل ما في هذا الجهاز بمحتوى النسخة المستوردة. متابعة؟',()=>{
+      Object.keys(j.all).forEach(k=>{if(k.startsWith('evac_'))localStorage.setItem(k,j.all[k])});location.reload()})}
+    catch(err){toast('الملف غير صالح')}};r.readAsText(f);e.target.value=''};
+
+/* ===== Hub rings ===== */
+function setRing(id,tp,p){const c=$('#'+id);if(!c)return;const L=2*Math.PI*18;c.style.strokeDasharray=L;c.style.strokeDashoffset=L*(1-p/100);
+  c.classList.toggle('full',p===100);c.classList.toggle('zero',p===0);$('#'+tp).textContent=p+'%'}
+function hubRender(){
+  try{
+    setRing('rgEvac','tpEvac',parseInt($('#pct').textContent)||0);
+    setRing('rgDr','tpDr',parseInt($('#drPct').textContent)||0);
+    setRing('rgSeq','tpSeq',parseInt($('#sqPct').textContent)||0);
+    setRing('rgReg','tpReg',rgOverallPct||0);
+    setRing('rgTm','tpTm',parseInt($('#tmPct').textContent)||0);
+    setRing('rgCm','tpCm',parseInt($('#cmPct').textContent)||0);
+    $('#tsCm').textContent=$('#cmStatus').textContent.startsWith('أُنجز 0')?'الختام — نشاط 6':$('#cmStatus').textContent;
+    const named=students.filter(x=>Object.values(x||{}).some(hasVal));
+    const done=named.filter(sOk).length;
+    setRing('rgSt','tpSt',named.length?Math.round(done/named.length*100):0);
+    $('#tsSt').textContent=named.length?`${done} من ${named.length} مستوفية`:'نموذج (7)';
+  }catch(e){}
+}
+
+/* ===== Router & init ===== */
+function route(){const h=(location.hash||'').slice(1);const id={evac:'v-evac',student:'v-student',drill:'v-drill',seq:'v-seq',team:'v-team',commit:'v-commit',reg:'v-reg'}[h]||'';
+  $$('.view').forEach(v=>v.classList.toggle('on',v.id===id));$$('#tabs .tab').forEach(t=>t.classList.toggle('on',t.dataset.v===id));
+  document.body.classList.toggle('sheet-open',!!id);
+  if(id){const v=$('#'+id);v.scrollTop=0}}
+$$('#tabs .tab[data-v]').forEach(t=>t.addEventListener('click',()=>{const r=t.getBoundingClientRect(),v=$('#'+t.dataset.v);
+  v.style.setProperty('--ox',(r.left+r.width/2)+'px');v.style.setProperty('--oy',(r.top+r.height/2)+'px')}));
+$$('.view').forEach(v=>{const t=$(`#tabs .tab[data-v="${v.id}"]`);v.style.setProperty('--c1',t.style.getPropertyValue('--c1'));v.style.setProperty('--c2',t.style.getPropertyValue('--c2'));const bar=document.createElement('div');bar.className='sheet-bar';
+  bar.innerHTML=`<button class="x" title="إغلاق" aria-label="إغلاق">✕</button><b>${t.querySelector('b').textContent}</b><span class="by">إعداد: شيخه العتيبي</span>`;
+  bar.querySelector('.x').onclick=()=>{location.hash='home'};v.prepend(bar)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('sheet-open')&&!$('.modal.open'))location.hash='home'});
+window.addEventListener('hashchange',route);
+
+try{const s=JSON.parse(localStorage.getItem(SKEY)||'null');if(s&&s.students&&s.students.length){students=s.students;cur=Math.min(s.cur||0,students.length-1)}}catch(e){}
+if(!students.length)students=[{}];
+sApply(students[cur]);sRender();
+let saved=null;try{saved=JSON.parse(localStorage.getItem(STORE)||'null')}catch(e){}
+apply(saved||{});
+let dsaved=null;try{dsaved=JSON.parse(localStorage.getItem(DKEY)||'null')}catch(e){}
+dApply(dsaved||{});
+let qs=null;try{qs=JSON.parse(localStorage.getItem(QKEY)||'null')}catch(e){}
+qApply({steps:qs||[]});
+let ts=null;try{ts=JSON.parse(localStorage.getItem(TKEY)||'null')}catch(e){}
+tmApply(ts||{});
+let cs=null;try{cs=JSON.parse(localStorage.getItem(CKEY)||'null')}catch(e){}
+cmApply(cs||{});
+let gs=null;try{gs=JSON.parse(localStorage.getItem(GKEY)||'null')}catch(e){}
+rgApply(gs||{});rgCur=(gs&&gs._cur)||'school';rgShow();
+if(!$('#cmSchool').value&&collect().school){$('#cmSchool').value=collect().school;cmRender()}
+route();
+</script>
+
+<div class="modal" id="profileModal">
+ <div class="box wide" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+  <h2 id="profileTitle">تعديل الأسماء</h2>
+  <p class="hint">عدّلي الأسماء الأساسية هنا. أسماء أعضاء الفرق والطلاب والمستلمين قابلة للتعديل داخل نماذجها.</p>
+  <form id="profileForm">
+   <div class="grid">
+    <div class="full"><label for="profileAuthor">إعداد</label><input id="profileAuthor" maxlength="100" required autocomplete="name"></div>
+    <div class="full"><label for="profileSchool">اسم المدرسة</label><input id="profileSchool" maxlength="160"></div>
+    <div><label for="profilePrincipal">اسم مديرة المدرسة</label><input id="profilePrincipal" maxlength="100"></div>
+    <div><label for="profileSafety">اسم منسقة الأمن والسلامة</label><input id="profileSafety" maxlength="100"></div>
+   </div>
+   <div class="profile-actions"><button type="submit" class="primary">حفظ الأسماء</button><button id="profileCancel" type="button">إلغاء</button></div>
+  </form>
+ </div>
+</div>
+<script>
+(() => {
+ 'use strict';
+ const KEY='evac_profile_sheikha_v1';
+ let profile={author:'شيخه العتيبي'};
+ try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&typeof saved.author==='string'&&saved.author.trim())profile=saved}catch(e){}
+ const one=s=>document.querySelector(s);
+ function authors(){document.querySelectorAll('[data-author]').forEach(e=>e.textContent=profile.author);document.querySelectorAll('.sheet-bar .by').forEach(e=>e.textContent='إعداد: '+profile.author);document.title='الأمن والسلامة المدرسية | إعداد: '+profile.author}
+ authors();
+ const modal=one('#profileModal'),author=one('#profileAuthor'),school=one('#profileSchool'),principal=one('#profilePrincipal'),safety=one('#profileSafety');
+ one('#editNames').addEventListener('click',()=>{author.value=profile.author;school.value=one('[data-k="school"]').value||'';principal.value=one('[data-k="principal"]').value||'';safety.value=one('[data-k="safety"]').value||'';modal.classList.add('open');author.focus()});
+ const close=()=>{modal.classList.remove('open');one('#editNames').focus()};
+ one('#profileCancel').addEventListener('click',close);
+ modal.addEventListener('click',e=>{if(e.target===modal)close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close()});
+ one('#profileForm').addEventListener('submit',e=>{
+  e.preventDefault();if(!author.value.trim()){author.focus();return}
+  profile={author:author.value.trim()};
+  const set=(selector,v)=>{const el=one(selector);if(el){el.value=v.trim();el.dispatchEvent(new Event('input',{bubbles:true}))}};
+  set('[data-k="school"]',school.value);set('[data-k="principal"]',principal.value);set('[data-k="safety"]',safety.value);
+  set('[data-g="schName"]',school.value);set('[data-g="con_0_0"]',principal.value);set('[data-g="con_1_0"]',safety.value);set('[data-g="cvName"]',safety.value);
+  set('#cmSchool',school.value);
+  try{localStorage.setItem(KEY,JSON.stringify(profile))}catch(e){}
+  authors();close();toast('تم حفظ الأسماء');
+ });
+ // Accessible labels for dynamically generated original fields.
+ document.querySelectorAll('input,select,textarea').forEach((el,i)=>{if(el.type==='hidden'||el.hasAttribute('aria-label')||el.labels?.length)return;const label=el.closest('div')?.querySelector('label');const th=el.closest('td')?.closest('tr')?.querySelector('th');el.setAttribute('aria-label',el.dataset.l||label?.textContent?.trim()||th?.textContent?.trim()||el.placeholder||'حقل '+(i+1))});
+})();
+</script></body>
+</html>
